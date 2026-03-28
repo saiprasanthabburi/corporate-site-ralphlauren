@@ -1,8 +1,10 @@
 {
   "mappings": [
-    "/content/aem-boilerplate/:/"
+    "/content/ralphlauren-corporate-sites/:/",
+    "/content/ralphlauren-corporate-sites/configuration:/.helix/config.json",
+    "/content/ralphlauren-corporate-sites/metadata:/metadata.json"
   ],
   "includes": [
-    "/content/aem-boilerplate/"
+    "/content/ralphlauren-corporate-sites/"
   ]
 }
