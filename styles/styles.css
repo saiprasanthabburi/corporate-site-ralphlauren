@@ -6,13 +6,12 @@
 :root {
   /* colors */
   --color-navy: #041e3a;
-  --color-white: #ffffff;
-  --color-black: #000000;
+  --color-white: #fff;
+  --color-black: #000;
   --color-light-gray: #f4f2f3;
   --color-mid-gray: #cbcbcb;
   --color-dark-gray: #6d6f73;
   --color-blue: #0c2340;
-
   --background-color: var(--color-white);
   --light-color: var(--color-light-gray);
   --dark-color: var(--color-navy);
@@ -21,8 +20,8 @@
   --link-hover-color: var(--color-blue);
 
   /* fonts */
-  --heading-font-family: 'le-jeune-deck', Georgia, 'Times New Roman', serif;
-  --body-font-family: 'founders-grotesk-text', Arial, Helvetica, sans-serif;
+  --heading-font-family: 'le-jeune-deck', georgia, 'Times New Roman', serif;
+  --body-font-family: 'founders-grotesk-text', arial, helvetica, sans-serif;
   --mono-font-family: 'founders-grotesk-mono', 'Courier New', monospace;
 
   /* body sizes */
