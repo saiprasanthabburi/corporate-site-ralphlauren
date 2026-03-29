@@ -132,6 +132,13 @@ export default async function decorate(block) {
     brandLink.closest('.button-container').className = '';
   }
 
+  // fallback: add brand text when logo image is missing
+  const brandAnchor = navBrand.querySelector('a');
+  if (brandAnchor && !brandAnchor.querySelector('img') && !brandAnchor.textContent.trim()) {
+    brandAnchor.textContent = 'Ralph Lauren Corporation';
+    brandAnchor.classList.add('nav-brand-text');
+  }
+
   const navSections = nav.querySelector('.nav-sections');
   if (navSections) {
     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {

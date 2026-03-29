@@ -164,6 +164,16 @@ header nav .nav-brand img {
   height: auto;
 }
 
+header nav .nav-brand a.nav-brand-text {
+  font-family: var(--heading-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--color-navy);
+  white-space: nowrap;
+}
+
 @media (width >= 900px) {
   header .nav-brand {
     display: flex;
@@ -179,6 +189,11 @@ header nav .nav-brand img {
   header nav .nav-brand img {
     width: 400px;
     height: auto;
+  }
+
+  header nav .nav-brand a.nav-brand-text {
+    font-size: 18px;
+    letter-spacing: 6px;
   }
 }
 
