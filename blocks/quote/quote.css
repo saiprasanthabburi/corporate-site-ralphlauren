@@ -16,8 +16,8 @@
   font-family: var(--heading-font-family);
   font-size: var(--heading-font-size-l);
   font-weight: 400;
-  font-style: italic;
-  line-height: 1.4;
+  line-height: 1.2;
+  letter-spacing: 1px;
   color: var(--color-navy);
   margin: 0;
   padding: 0;
@@ -38,6 +38,7 @@
   }
 
   .quote blockquote {
-    font-size: 32px;
+    font-size: 35px;
+    line-height: 42px;
   }
 }
