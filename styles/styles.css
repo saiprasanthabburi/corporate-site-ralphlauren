@@ -310,6 +310,34 @@ main .section.skyline {
   padding: 0;
 }
 
+main .section.skyline h1,
+main .section.skyline h2,
+main .section.skyline h3,
+main .section.skyline h4,
+main .section.skyline h5,
+main .section.skyline h6 {
+  color: var(--color-white);
+}
+
+main .section.skyline p,
+main .section.skyline blockquote {
+  color: var(--color-white);
+}
+
+main .section.skyline a:any-link {
+  color: var(--color-white);
+}
+
+main .section.skyline a.button:any-link {
+  border-color: var(--color-white);
+  color: var(--color-white);
+}
+
+main .section.skyline a.button:hover {
+  background-color: var(--color-white);
+  color: var(--color-navy);
+}
+
 main .section.skyline > div {
   max-width: unset;
   padding: 0;
@@ -352,34 +380,6 @@ main .section.skyline::after {
   background: rgb(0 0 0 / 55%);
   z-index: 1;
   pointer-events: none;
-}
-
-main .section.skyline h1,
-main .section.skyline h2,
-main .section.skyline h3,
-main .section.skyline h4,
-main .section.skyline h5,
-main .section.skyline h6 {
-  color: var(--color-white);
-}
-
-main .section.skyline p,
-main .section.skyline blockquote {
-  color: var(--color-white);
-}
-
-main .section.skyline a:any-link {
-  color: var(--color-white);
-}
-
-main .section.skyline a.button:any-link {
-  border-color: var(--color-white);
-  color: var(--color-white);
-}
-
-main .section.skyline a.button:hover {
-  background-color: var(--color-white);
-  color: var(--color-navy);
 }
 
 /* about columns white text inside skyline */
