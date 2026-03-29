@@ -252,6 +252,12 @@ main > .section {
   padding: var(--spacing-m) 0;
 }
 
+/* hide empty sections (no child elements) */
+main > .section:not(:has(*)) {
+  display: none;
+  padding: 0;
+}
+
 main > .section > div {
   max-width: 1340px;
   margin: auto;
@@ -289,12 +295,6 @@ main > .section:first-of-type {
   main > .section > div {
     padding: 0 var(--spacing-l);
   }
-}
-
-/* hide empty sections (no child elements) */
-main > .section:not(:has(*)) {
-  display: none;
-  padding: 0;
 }
 
 /* section metadata */
