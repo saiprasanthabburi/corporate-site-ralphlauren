@@ -13,6 +13,26 @@ export default function decorate(block) {
     }
   }
 
+  // auto-detect about variant: columns with "About Us" heading
+  if (!block.classList.contains('about')) {
+    const h2 = block.querySelector('h2');
+    if (h2 && h2.textContent.trim().toLowerCase() === 'about us') {
+      block.classList.add('about');
+    }
+  }
+
+  // auto-detect newsroom variant: columns with "Newsroom" heading + multiple images
+  if (!block.classList.contains('newsroom')) {
+    const h2 = block.querySelector('h2');
+    const hasNewsroom = h2 && h2.textContent.trim().toLowerCase().includes('newsroom');
+    const hasMultiPics = [...block.querySelectorAll('div > div')].some(
+      (col) => col.querySelectorAll('picture').length >= 2,
+    );
+    if (hasNewsroom && hasMultiPics) {
+      block.classList.add('newsroom');
+    }
+  }
+
   // setup image columns
   [...block.children].forEach((row) => {
     [...row.children].forEach((col) => {
