@@ -2,6 +2,11 @@ import { createOptimizedPicture } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
+  // auto-detect team variant: cards with h4 headings (team member pattern)
+  if (!block.classList.contains('team') && block.querySelector('h4')) {
+    block.classList.add('team');
+  }
+
   /* change to ul, li */
   const ul = document.createElement('ul');
   [...block.children].forEach((row) => {
