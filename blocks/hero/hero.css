@@ -108,6 +108,16 @@
   color: var(--color-white);
 }
 
+/* image-only hero (no text content) — remove gradient overlay */
+.hero:not(:has(> div))::after {
+  display: none;
+}
+
+.hero:not(:has(> div)) {
+  min-height: 462px;
+  padding: 0;
+}
+
 @media (width >= 900px) {
   .hero {
     justify-content: flex-end;
