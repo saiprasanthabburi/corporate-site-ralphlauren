@@ -4,7 +4,7 @@ header .nav-wrapper {
   width: 100%;
   z-index: 2;
   position: fixed;
-  border-bottom: 1px solid var(--color-mid-gray);
+  height: 100%;
 }
 
 header nav {
@@ -235,7 +235,7 @@ header nav .nav-sections ul > li > ul > li {
     visibility: visible;
     white-space: nowrap;
     width: 100%;
-    padding: 12px 0;
+    padding: 16px 0;
   }
 
   header nav[aria-expanded='true'] .nav-sections {
