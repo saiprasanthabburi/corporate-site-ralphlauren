@@ -241,8 +241,4 @@
     grid-template-columns: repeat(3, 1fr);
   }
 
-  .cards.articles > ul > li:nth-child(n+4) {
-    border-top: 1px solid var(--color-mid-gray);
-    padding-top: var(--spacing-l);
-  }
 }
