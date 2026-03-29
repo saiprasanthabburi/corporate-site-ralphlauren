@@ -68,7 +68,71 @@
   color: currentcolor;
 }
 
-/* brand variant: box button style per Figma */
+/* ----------------------------------------------------------------
+   Variant base rules (> div level)
+   ---------------------------------------------------------------- */
+.columns.about > div {
+  gap: var(--spacing-s);
+}
+
+.columns.newsroom > div {
+  gap: 0;
+}
+
+.columns.brand > div {
+  flex-direction: row;
+  gap: 0;
+}
+
+.columns.leader-featured > div {
+  gap: var(--spacing-l);
+}
+
+.columns.contact > div {
+  gap: var(--spacing-l);
+}
+
+/* ----------------------------------------------------------------
+   Variant child rules (> div > div level)
+   Ordered by ascending specificity:
+     .X > div > div            (0,2,2)
+     .X > div > .columns-img-col (0,2,2)
+     .X > div > div:not(...)   (0,3,2)
+     .X > div > div:first-child (0,3,2)
+     .X > div > div:last-child (0,3,2)
+   ---------------------------------------------------------------- */
+.columns.brand > div > div {
+  flex: 1;
+  order: unset;
+  min-width: 0;
+}
+
+.columns.about > div > div:not(.columns-img-col) {
+  order: 0;
+}
+
+.columns.about > div > .columns-img-col {
+  order: 1;
+}
+
+.columns.newsroom > div > div:first-child {
+  order: 1;
+  background-color: var(--color-blue);
+  color: var(--color-white);
+  padding: var(--spacing-l) var(--spacing-s);
+}
+
+.columns.newsroom > div > div:last-child {
+  order: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  position: relative;
+}
+
+/* ----------------------------------------------------------------
+   Variant link overrides
+   ---------------------------------------------------------------- */
 .columns.brand > div > div a:any-link {
   border: 1px solid var(--color-navy);
   padding: 19px 26px;
@@ -81,7 +145,6 @@
   opacity: 1;
 }
 
-/* contact variant: SEND box button per Figma */
 .columns.contact > div > div a.button.primary:any-link {
   border: 1px solid var(--color-navy);
   background-color: var(--color-navy);
@@ -100,19 +163,31 @@
   opacity: 1;
 }
 
-/* about variant — text above, image below per Figma Desktop-1 */
-.columns.about > div {
-  gap: var(--spacing-s);
+/* newsroom text colors */
+.columns.newsroom > div > div:first-child p,
+.columns.newsroom > div > div:first-child h2,
+.columns.newsroom > div > div:first-child a:any-link {
+  color: var(--color-white);
 }
 
-.columns.about > div > div:not(.columns-img-col) {
-  order: 0;
+.columns.newsroom > div > div:first-child a:any-link {
+  border-bottom-color: var(--color-white);
 }
 
-.columns.about > div > .columns-img-col {
-  order: 1;
-}
-
+/* ----------------------------------------------------------------
+   Variant heading / text rules
+   Ordered by ascending specificity:
+     .X > div > div:first-child h3            (0,3,3)
+     .X > div > div:not(...) h2               (0,3,3)
+     .X > div > div:not(...) p                (0,3,3)
+     .X > div > div:first-child p             (0,3,3)
+     .X > div > div:last-child p              (0,3,3)
+     .X > div > div:first-child h3:first-child (0,4,3)
+     .X > div > div:not(...) p:first-child    (0,4,3)
+     .X > div > div:not(...) p:nth-child(3)   (0,4,3)
+     .X > div > div:last-child p:first-child  (0,4,3)
+     .X > div > div:last-child p:nth-child(2) (0,4,3)
+   ---------------------------------------------------------------- */
 .columns.about > div > div:not(.columns-img-col) h2 {
   font-family: var(--heading-font-family);
   font-size: 35px;
@@ -124,32 +199,6 @@
   line-height: 1.75;
 }
 
-/* newsroom variant — images above, dark text area below per Figma Desktop-1 */
-.columns.newsroom > div {
-  gap: 0;
-}
-
-.columns.newsroom > div > div:first-child {
-  order: 1;
-  background-color: var(--color-blue);
-  color: var(--color-white);
-  padding: var(--spacing-l) var(--spacing-s);
-}
-
-.columns.newsroom > div > div:first-child p,
-.columns.newsroom > div > div:first-child h2,
-.columns.newsroom > div > div:first-child a:any-link {
-  color: var(--color-white);
-}
-
-.columns.newsroom > div > div:first-child a:any-link {
-  border-bottom-color: var(--color-white);
-}
-
-.columns.newsroom > div > div:last-child {
-  order: 0;
-}
-
 .columns.newsroom > div > div:not(.columns-img-col) h2 {
   font-family: var(--heading-font-family);
   font-size: 44px;
@@ -157,26 +206,82 @@
   line-height: 52px;
 }
 
-.columns.brand > div {
-  flex-direction: row;
-  gap: 0;
+.columns.brand > div > div:not(.columns-img-col) h2 {
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-xl);
+  font-weight: 400;
+  margin: 0 0 var(--spacing-s);
 }
 
-.columns.leader-featured > div {
-  gap: var(--spacing-l);
+.columns.brand > div > div:not(.columns-img-col) p {
+  line-height: 1.75;
 }
 
-.columns.contact > div {
-  gap: var(--spacing-l);
+.columns.contact > div > div:first-child h3 {
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: var(--spacing-l) 0 var(--spacing-s);
 }
 
-.columns.brand > div > div {
-  flex: 1;
-  order: unset;
-  min-width: 0;
+.columns.contact > div > div:first-child p {
+  font-size: var(--body-font-size-s);
+  line-height: 1.5;
+  margin: 0 0 4px;
 }
 
-/* variant image rules — ascending specificity */
+/* newsroom image grid overlap effect */
+.columns.newsroom > div > div:last-child p {
+  margin: 0;
+}
+
+.columns.contact > div > div:first-child h3:first-child {
+  margin-top: 0;
+}
+
+.columns.leader-featured > div > div:not(.columns-img-col) h2 {
+  font-family: var(--heading-font-family);
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 1.2;
+  margin: 8px 0 var(--spacing-m);
+}
+
+.columns.leader-featured > div > div:not(.columns-img-col) p:first-child {
+  font-family: var(--mono-font-family);
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--color-dark-gray);
+  margin: 0;
+}
+
+.columns.leader-featured > div > div:not(.columns-img-col) p:nth-child(3) {
+  font-family: var(--heading-font-family);
+  font-size: 16px;
+  line-height: 28px;
+  letter-spacing: 0.25px;
+  color: var(--color-navy);
+  margin: 0 0 var(--spacing-m);
+}
+
+.columns.newsroom > div > div:last-child p:first-child {
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+  z-index: 1;
+}
+
+.columns.newsroom > div > div:last-child p:nth-child(2) {
+  grid-column: 1 / -1;
+  grid-row: 2 / 3;
+  z-index: 0;
+  margin-left: 30%;
+}
+
+/* ----------------------------------------------------------------
+   Variant image rules
+   ---------------------------------------------------------------- */
 .columns.about > div > .columns-img-col img {
   aspect-ratio: auto;
   object-fit: cover;
@@ -200,37 +305,15 @@
   object-fit: cover;
 }
 
-.columns.newsroom > div > div:last-child {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0;
-  position: relative;
-}
-
-.columns.newsroom > div > div:last-child p {
-  margin: 0;
-}
-
-.columns.newsroom > div > div:last-child p:first-child {
-  grid-column: 1 / 2;
-  grid-row: 1 / 3;
-  z-index: 1;
-}
-
-.columns.newsroom > div > div:last-child p:nth-child(2) {
-  grid-column: 1 / -1;
-  grid-row: 2 / 3;
-  z-index: 0;
-  margin-left: 30%;
-}
-
 .columns.newsroom > div > div:last-child picture img {
   aspect-ratio: 4 / 3;
   object-fit: cover;
   box-shadow: 0 4px 8px rgb(0 0 0 / 25%);
 }
 
-/* variant content container rules */
+/* ----------------------------------------------------------------
+   Variant content container rules
+   ---------------------------------------------------------------- */
 .columns.brand > div > div:not(.columns-img-col) {
   padding: var(--spacing-s);
   display: flex;
@@ -256,70 +339,26 @@
   padding-right: var(--spacing-l);
 }
 
-/* variant text rules — ascending specificity per element type */
-.columns.brand > div > div:not(.columns-img-col) h2 {
-  font-family: var(--heading-font-family);
-  font-size: var(--heading-font-size-xl);
-  font-weight: 400;
-  margin: 0 0 var(--spacing-s);
-}
-
-.columns.leader-featured > div > div:not(.columns-img-col) h2 {
-  font-family: var(--heading-font-family);
-  font-size: 48px;
-  font-weight: 400;
-  line-height: 1.2;
-  margin: 8px 0 var(--spacing-m);
-}
-
-.columns.brand > div > div:not(.columns-img-col) p {
-  line-height: 1.75;
-}
-
-.columns.contact > div > div:first-child p {
-  font-size: var(--body-font-size-s);
-  line-height: 1.5;
-  margin: 0 0 4px;
-}
-
-.columns.contact > div > div:first-child h3 {
-  font-family: var(--body-font-family);
-  font-size: 16px;
-  font-weight: 700;
-  text-transform: uppercase;
-  margin: var(--spacing-l) 0 var(--spacing-s);
-}
-
-.columns.contact > div > div:first-child h3:first-child {
-  margin-top: 0;
-}
-
-.columns.leader-featured > div > div:not(.columns-img-col) p:first-child {
-  font-family: var(--mono-font-family);
-  font-size: 11px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--color-dark-gray);
-  margin: 0;
-}
-
-.columns.leader-featured > div > div:not(.columns-img-col) p:nth-child(3) {
-  font-family: var(--heading-font-family);
-  font-size: 16px;
-  line-height: 28px;
-  letter-spacing: 0.25px;
-  color: var(--color-navy);
-  margin: 0 0 var(--spacing-m);
-}
-
 /* brand full-width container — remove section padding for edge-to-edge layout */
 .columns-wrapper:has(> .columns.brand) {
   max-width: unset;
   padding: 0;
 }
 
+/* ----------------------------------------------------------------
+   Desktop overrides — ordered by ascending specificity
+   ---------------------------------------------------------------- */
 @media (width >= 900px) {
   .columns.about > div {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .columns.brand > div {
+    gap: 0;
+  }
+
+  .columns.newsroom > div {
     flex-direction: column;
     align-items: stretch;
   }
@@ -332,19 +371,6 @@
   .columns.about > div > .columns-img-col img {
     width: 100%;
     height: auto;
-  }
-
-  .columns.newsroom > div {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .columns.newsroom > div > div:first-child {
-    padding: var(--spacing-l);
-  }
-
-  .columns.brand > div {
-    gap: 0;
   }
 
   .columns.brand > div > div {
@@ -361,5 +387,9 @@
 
   .columns.brand > div > div a:any-link {
     min-width: 240px;
+  }
+
+  .columns.newsroom > div > div:first-child {
+    padding: var(--spacing-l);
   }
 }
