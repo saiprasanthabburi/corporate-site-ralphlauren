@@ -310,17 +310,17 @@ main .section.skyline {
   padding: 0;
 }
 
+main .section.skyline p,
+main .section.skyline blockquote {
+  color: var(--color-white);
+}
+
 main .section.skyline h1,
 main .section.skyline h2,
 main .section.skyline h3,
 main .section.skyline h4,
 main .section.skyline h5,
 main .section.skyline h6 {
-  color: var(--color-white);
-}
-
-main .section.skyline p,
-main .section.skyline blockquote {
   color: var(--color-white);
 }
 
@@ -338,41 +338,33 @@ main .section.skyline a.button:hover {
   color: var(--color-navy);
 }
 
-main .section.skyline > div {
-  max-width: unset;
-  padding: 0;
-}
-
-main .section.skyline > div > * {
-  position: relative;
-  z-index: 2;
-  max-width: 1340px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: var(--spacing-l);
-  padding-right: var(--spacing-l);
-}
-
-main .section.skyline > div > p:first-child {
+/* background image — default-content-wrapper contains the skyline <p><picture> */
+main .section.skyline > .default-content-wrapper {
   position: absolute;
   inset: 0;
   z-index: 0;
-  margin: 0;
   max-width: unset;
   padding: 0;
+  margin: 0;
 }
 
-main .section.skyline > div > p:first-child picture {
+main .section.skyline > .default-content-wrapper p {
+  margin: 0;
+  height: 100%;
+}
+
+main .section.skyline > .default-content-wrapper picture {
   display: block;
   height: 100%;
 }
 
-main .section.skyline > div > p:first-child img {
+main .section.skyline > .default-content-wrapper img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
+/* dark overlay */
 main .section.skyline::after {
   content: '';
   position: absolute;
@@ -380,6 +372,13 @@ main .section.skyline::after {
   background: rgb(0 0 0 / 55%);
   z-index: 1;
   pointer-events: none;
+}
+
+/* content wrappers above background */
+main .section.skyline > .quote-wrapper,
+main .section.skyline > .columns-wrapper {
+  position: relative;
+  z-index: 2;
 }
 
 /* about columns white text inside skyline */
@@ -391,6 +390,35 @@ main .section.skyline .columns.about > div > div > p:first-child {
 main .section.skyline .columns.about > div > div a:any-link {
   color: var(--color-white);
   border-bottom-color: var(--color-white);
+}
+
+/* desktop: About + Newsroom side by side */
+@media (width >= 900px) {
+  main .section.skyline {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 var(--spacing-l);
+  }
+
+  main .section.skyline > * {
+    grid-column: 1 / -1;
+  }
+
+  main .section.skyline > .columns-wrapper:has(.columns.about) {
+    grid-column: 1;
+    max-width: unset;
+    margin: 0;
+    padding-left: max(var(--spacing-l), calc((100% - 1240px) / 2));
+    padding-right: 0;
+  }
+
+  main .section.skyline > .columns-wrapper:has(.columns.newsroom) {
+    grid-column: 2;
+    max-width: unset;
+    margin: 0;
+    padding-left: 0;
+    padding-right: max(var(--spacing-l), calc((100% - 1240px) / 2));
+  }
 }
 
 /* eyebrow text */
