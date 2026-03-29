@@ -12,9 +12,9 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
   box-sizing: border-box;
-  min-height: 400px;
+  min-height: 530px;
   padding: var(--spacing-l) var(--spacing-s);
   overflow: hidden;
 }
@@ -57,8 +57,8 @@
 }
 
 .hero h1 {
-  font-size: 36px;
-  line-height: 1.2;
+  font-size: 48px;
+  line-height: 1.15;
 }
 
 .hero h2 {
@@ -110,6 +110,7 @@
 
 @media (width >= 900px) {
   .hero {
+    justify-content: flex-end;
     min-height: 462px;
     padding: var(--spacing-xl) var(--spacing-l);
   }
