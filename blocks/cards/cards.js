@@ -7,6 +7,17 @@ export default function decorate(block) {
     block.classList.add('team');
   }
 
+  // auto-detect articles variant: cards with h3 + category/date paragraphs
+  if (!block.classList.contains('articles') && !block.classList.contains('team')) {
+    const firstCard = block.querySelector(':scope > div');
+    if (firstCard) {
+      const body = [...firstCard.children].find((d) => !d.querySelector('picture') || d.children.length > 1);
+      if (body && body.querySelector('h3') && body.querySelectorAll('p').length >= 2) {
+        block.classList.add('articles');
+      }
+    }
+  }
+
   /* change to ul, li */
   const ul = document.createElement('ul');
   [...block.children].forEach((row) => {
