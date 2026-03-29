@@ -21,4 +21,11 @@ export default function decorate(block) {
       row.remove();
     }
   }
+
+  // Clean up any remaining empty content divs and mark image-only heroes
+  const contentDiv = block.querySelector(':scope > div');
+  if (!contentDiv || !contentDiv.textContent.trim()) {
+    if (contentDiv) contentDiv.remove();
+    block.classList.add('image-only');
+  }
 }

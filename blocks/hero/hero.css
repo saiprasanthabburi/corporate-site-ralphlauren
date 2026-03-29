@@ -109,11 +109,11 @@
 }
 
 /* image-only hero (no text content) — remove gradient overlay */
-.hero:not(:has(> div))::after {
+.hero.image-only::after {
   display: none;
 }
 
-.hero:not(:has(> div)) {
+.hero.image-only {
   min-height: 462px;
   padding: 0;
 }
@@ -131,7 +131,7 @@
   }
 
   .hero h2 {
-    font-size: 35px;
-    max-width: 600px;
+    font-size: 44px;
+    line-height: 52px;
   }
 }
