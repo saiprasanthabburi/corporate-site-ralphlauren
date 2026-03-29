@@ -1,72 +1,63 @@
 /*
- * Copyright 2020 Adobe. All rights reserved.
- * This file is licensed to you under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License. You may obtain a copy
- * of the License at http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under
- * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
- * OF ANY KIND, either express or implied. See the License for the specific language
- * governing permissions and limitations under the License.
+ * Ralph Lauren Corporation - Edge Delivery Services
+ * Design tokens extracted from Figma
  */
 
 :root {
   /* colors */
-  --background-color: white;
-  --light-color: #f8f8f8;
-  --dark-color: #505050;
-  --text-color: #131313;
-  --link-color: #3b63fb;
-  --link-hover-color: #1d3ecf;
+  --color-navy: #041e3a;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-light-gray: #f4f2f3;
+  --color-mid-gray: #cbcbcb;
+  --color-dark-gray: #6d6f73;
+  --color-blue: #0c2340;
+
+  --background-color: var(--color-white);
+  --light-color: var(--color-light-gray);
+  --dark-color: var(--color-navy);
+  --text-color: var(--color-navy);
+  --link-color: var(--color-navy);
+  --link-hover-color: var(--color-blue);
 
   /* fonts */
-  --body-font-family: roboto, roboto-fallback, sans-serif;
-  --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
+  --heading-font-family: 'le-jeune-deck', Georgia, 'Times New Roman', serif;
+  --body-font-family: 'founders-grotesk-text', Arial, Helvetica, sans-serif;
+  --mono-font-family: 'founders-grotesk-mono', 'Courier New', monospace;
 
   /* body sizes */
-  --body-font-size-m: 22px;
-  --body-font-size-s: 19px;
-  --body-font-size-xs: 17px;
+  --body-font-size-m: 16px;
+  --body-font-size-s: 14px;
+  --body-font-size-xs: 12px;
 
   /* heading sizes */
-  --heading-font-size-xxl: 55px;
-  --heading-font-size-xl: 44px;
-  --heading-font-size-l: 34px;
-  --heading-font-size-m: 27px;
-  --heading-font-size-s: 24px;
-  --heading-font-size-xs: 22px;
+  --heading-font-size-xxl: 44px;
+  --heading-font-size-xl: 35px;
+  --heading-font-size-l: 28px;
+  --heading-font-size-m: 22px;
+  --heading-font-size-s: 18px;
+  --heading-font-size-xs: 16px;
 
   /* nav height */
-  --nav-height: 64px;
-}
+  --nav-height: 120px;
 
-/* fallback fonts */
-@font-face {
-  font-family: roboto-condensed-fallback;
-  size-adjust: 88.82%;
-  src: local('Arial');
-}
-
-@font-face {
-  font-family: roboto-fallback;
-  size-adjust: 99.529%;
-  src: local('Arial');
+  /* spacing */
+  --spacing-xxl: 120px;
+  --spacing-xl: 75px;
+  --spacing-l: 50px;
+  --spacing-m: 40px;
+  --spacing-s: 20px;
+  --spacing-xs: 10px;
 }
 
 @media (width >= 900px) {
   :root {
-    /* body sizes */
-    --body-font-size-m: 18px;
-    --body-font-size-s: 16px;
-    --body-font-size-xs: 14px;
-
-    /* heading sizes */
-    --heading-font-size-xxl: 45px;
-    --heading-font-size-xl: 36px;
+    --heading-font-size-xxl: 44px;
+    --heading-font-size-xl: 35px;
     --heading-font-size-l: 28px;
     --heading-font-size-m: 22px;
     --heading-font-size-s: 20px;
-    --heading-font-size-xs: 18px;
+    --heading-font-size-xs: 16px;
   }
 }
 
@@ -77,7 +68,7 @@ body {
   color: var(--text-color);
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-m);
-  line-height: 1.6;
+  line-height: 1.75;
 }
 
 body.appear {
@@ -107,9 +98,10 @@ h6 {
   margin-top: 0.8em;
   margin-bottom: 0.25em;
   font-family: var(--heading-font-family);
-  font-weight: 600;
-  line-height: 1.25;
+  font-weight: 400;
+  line-height: 1.2;
   scroll-margin: 40px;
+  color: var(--color-navy);
 }
 
 h1 { font-size: var(--heading-font-size-xxl); }
@@ -127,6 +119,17 @@ pre,
 blockquote {
   margin-top: 0.8em;
   margin-bottom: 0.25em;
+}
+
+blockquote {
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-l);
+  line-height: 1.4;
+  text-align: center;
+  color: var(--color-navy);
+  margin: var(--spacing-l) auto;
+  max-width: 700px;
+  padding: 0 var(--spacing-s);
 }
 
 code,
@@ -172,29 +175,46 @@ button {
   display: inline-block;
   max-width: 100%;
   margin: 12px 0;
-  border: 2px solid transparent;
-  border-radius: 2.4em;
-  padding: 0.5em 1.2em;
-  font-family: var(--body-font-family);
+  border: 1px solid var(--color-navy);
+  padding: 19px 26px;
+  font-family: var(--mono-font-family);
   font-style: normal;
-  font-weight: 500;
-  line-height: 1.25;
+  font-weight: 400;
+  font-size: 11px;
+  letter-spacing: 1px;
+  line-height: 14px;
   text-align: center;
   text-decoration: none;
-  background-color: var(--link-color);
-  color: var(--background-color);
+  text-transform: uppercase;
+  background-color: transparent;
+  color: var(--color-navy);
   cursor: pointer;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  min-width: 240px;
 }
 
 a.button:hover,
 a.button:focus,
 button:hover,
 button:focus {
-  background-color: var(--link-hover-color);
+  background-color: var(--color-navy);
+  color: var(--color-white);
   cursor: pointer;
+}
+
+a.button.primary,
+button.primary {
+  background-color: var(--color-navy);
+  color: var(--color-white);
+  border-color: var(--color-navy);
+}
+
+a.button.primary:hover,
+button.primary:hover {
+  background-color: var(--color-blue);
+  border-color: var(--color-blue);
 }
 
 button:disabled,
@@ -206,8 +226,8 @@ button:disabled:hover {
 a.button.secondary,
 button.secondary {
   background-color: unset;
-  border: 2px solid currentcolor;
-  color: var(--text-color);
+  border: 1px solid var(--color-navy);
+  color: var(--color-navy);
 }
 
 main img {
@@ -229,22 +249,24 @@ main img {
 
 /* sections */
 main > .section {
-  margin: 40px 0;
+  margin: 0;
+  padding: var(--spacing-m) 0;
 }
 
 main > .section > div {
-  max-width: 1200px;
+  max-width: 1340px;
   margin: auto;
-  padding: 0 24px;
+  padding: 0 var(--spacing-l);
 }
 
 main > .section:first-of-type {
   margin-top: 0;
+  padding-top: 0;
 }
 
 @media (width >= 900px) {
   main > .section > div {
-    padding: 0 32px;
+    padding: 0 var(--spacing-l);
   }
 }
 
@@ -253,5 +275,50 @@ main .section.light,
 main .section.highlight {
   background-color: var(--light-color);
   margin: 0;
-  padding: 40px 0;
+  padding: var(--spacing-m) 0;
+}
+
+main .section.dark {
+  background-color: var(--color-navy);
+  color: var(--color-white);
+  margin: 0;
+  padding: var(--spacing-m) 0;
+}
+
+main .section.dark h1,
+main .section.dark h2,
+main .section.dark h3,
+main .section.dark h4,
+main .section.dark h5,
+main .section.dark h6 {
+  color: var(--color-white);
+}
+
+main .section.dark a:any-link {
+  color: var(--color-white);
+}
+
+/* eyebrow text */
+.eyebrow {
+  font-family: var(--mono-font-family);
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  line-height: 14px;
+}
+
+/* CTA link style (underline) */
+.cta-link {
+  font-family: var(--mono-font-family);
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: 1px solid currentcolor;
+  padding-bottom: 6px;
+}
+
+.cta-link:hover {
+  text-decoration: none;
+  opacity: 0.8;
 }

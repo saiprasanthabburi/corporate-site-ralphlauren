@@ -159,6 +159,17 @@ export default async function decorate(block) {
   toggleMenu(nav, navSections, isDesktop.matches);
   isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
 
+  // search icon
+  const searchIcon = document.createElement('div');
+  searchIcon.classList.add('nav-search');
+  searchIcon.innerHTML = `<a href="/search" aria-label="Search">
+    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.5">
+      <circle cx="6" cy="6" r="5"/>
+      <line x1="9.5" y1="9.5" x2="14" y2="14"/>
+    </svg>
+  </a>`;
+  nav.append(searchIcon);
+
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(nav);

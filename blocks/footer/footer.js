@@ -16,5 +16,15 @@ export default async function decorate(block) {
   const footer = document.createElement('div');
   while (fragment.firstElementChild) footer.append(fragment.firstElementChild);
 
+  // mobile accordion: toggle list visibility when heading is clicked
+  footer.querySelectorAll('h2').forEach((heading) => {
+    heading.addEventListener('click', () => {
+      const section = heading.closest('.section');
+      if (section) {
+        section.classList.toggle('expanded');
+      }
+    });
+  });
+
   block.append(footer);
 }

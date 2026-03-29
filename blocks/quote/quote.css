@@ -1,0 +1,43 @@
+.quote-container {
+  max-width: unset;
+}
+
+.quote-container .quote-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--spacing-xl) var(--spacing-s);
+}
+
+.quote {
+  text-align: center;
+}
+
+.quote blockquote {
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-l);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--color-navy);
+  margin: 0;
+  padding: 0;
+}
+
+.quote .quote-signature {
+  margin-top: var(--spacing-m);
+}
+
+.quote .quote-signature img {
+  max-width: 200px;
+  height: auto;
+}
+
+@media (width >= 900px) {
+  .quote-container .quote-wrapper {
+    padding: var(--spacing-xxl) var(--spacing-l);
+  }
+
+  .quote blockquote {
+    font-size: 32px;
+  }
+}

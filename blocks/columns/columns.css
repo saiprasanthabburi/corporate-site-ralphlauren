@@ -1,3 +1,4 @@
+/* columns block - default */
 .columns > div {
   display: flex;
   flex-direction: column;
@@ -23,11 +24,251 @@
   .columns > div {
     align-items: center;
     flex-direction: unset;
-    gap: 24px;
+    gap: var(--spacing-l);
   }
 
   .columns > div > div {
     flex: 1;
     order: unset;
+  }
+}
+
+/* shared descendant styles */
+.columns > div > div > p:first-child {
+  font-family: var(--mono-font-family);
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--color-dark-gray);
+  margin: 0 0 8px;
+}
+
+.columns > div > div h2 {
+  margin-top: 0;
+}
+
+.columns > div > div a:any-link {
+  font-family: var(--mono-font-family);
+  font-size: 11px;
+  line-height: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  padding: 0;
+  min-width: 0;
+  border-bottom: 1px solid currentcolor;
+  padding-bottom: 6px;
+}
+
+.columns > div > div a:hover {
+  text-decoration: none;
+  opacity: 0.8;
+  background-color: transparent;
+  color: currentcolor;
+}
+
+/* brand variant: box button style per Figma */
+.columns.brand > div > div a:any-link {
+  border: 1px solid var(--color-navy);
+  padding: 19px 26px;
+  white-space: nowrap;
+}
+
+.columns.brand > div > div a:hover {
+  background-color: var(--color-navy);
+  color: var(--color-white);
+  opacity: 1;
+}
+
+/* contact variant: SEND box button per Figma */
+.columns.contact > div > div a.button.primary:any-link {
+  border: 1px solid var(--color-navy);
+  background-color: var(--color-navy);
+  color: var(--color-white);
+  padding: 19px 26px;
+  min-width: 240px;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--color-navy);
+  padding-bottom: 19px;
+}
+
+.columns.contact > div > div a.button.primary:hover {
+  background-color: var(--color-blue);
+  border-color: var(--color-blue);
+  color: var(--color-white);
+  opacity: 1;
+}
+
+/* variant container gaps — grouped for ascending specificity */
+.columns.about > div {
+  gap: var(--spacing-l);
+}
+
+.columns.newsroom > div {
+  gap: var(--spacing-l);
+}
+
+.columns.brand > div {
+  flex-direction: row;
+  gap: 0;
+}
+
+.columns.leader-featured > div {
+  gap: var(--spacing-l);
+}
+
+.columns.contact > div {
+  gap: var(--spacing-l);
+}
+
+.columns.brand > div > div {
+  flex: 1;
+  order: unset;
+  min-width: 0;
+}
+
+/* variant image rules — ascending specificity */
+.columns.about > div > .columns-img-col img {
+  aspect-ratio: auto;
+  object-fit: cover;
+}
+
+.columns.brand > div > .columns-img-col {
+  display: flex;
+}
+
+.columns.brand > div > .columns-img-col picture {
+  flex: 1;
+}
+
+.columns.brand > div > .columns-img-col img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.columns.leader-featured > div > .columns-img-col img {
+  aspect-ratio: auto;
+  object-fit: cover;
+}
+
+.columns.newsroom > div > div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-s);
+}
+
+.columns.newsroom > div > div:last-child picture img {
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+/* variant content container rules */
+.columns.brand > div > div:not(.columns-img-col) {
+  padding: var(--spacing-s);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #f4f2f3;
+}
+
+.columns.leader-featured > div > div:not(.columns-img-col) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px;
+  background-color: #f4f2f3;
+}
+
+.columns.contact > div > div:first-child {
+  border-right: 1px solid var(--color-mid-gray);
+  padding-right: var(--spacing-l);
+}
+
+/* variant text rules — ascending specificity per element type */
+.columns.brand > div > div:not(.columns-img-col) h2 {
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-xl);
+  font-weight: 400;
+  margin: 0 0 var(--spacing-s);
+}
+
+.columns.leader-featured > div > div:not(.columns-img-col) h2 {
+  font-family: var(--heading-font-family);
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 1.2;
+  margin: 8px 0 var(--spacing-m);
+}
+
+.columns.brand > div > div:not(.columns-img-col) p {
+  line-height: 1.75;
+}
+
+.columns.contact > div > div:first-child p {
+  font-size: var(--body-font-size-s);
+  line-height: 1.5;
+  margin: 0 0 4px;
+}
+
+.columns.contact > div > div:first-child h3 {
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: var(--spacing-l) 0 var(--spacing-s);
+}
+
+.columns.contact > div > div:first-child h3:first-child {
+  margin-top: 0;
+}
+
+.columns.leader-featured > div > div:not(.columns-img-col) p:first-child {
+  font-family: var(--mono-font-family);
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--color-dark-gray);
+  margin: 0;
+}
+
+.columns.leader-featured > div > div:not(.columns-img-col) p:nth-child(3) {
+  font-family: var(--heading-font-family);
+  font-size: 16px;
+  line-height: 28px;
+  letter-spacing: 0.25px;
+  color: var(--color-navy);
+  margin: 0 0 var(--spacing-m);
+}
+
+/* brand full-width container — remove section padding for edge-to-edge layout */
+.columns-wrapper:has(> .columns.brand) {
+  max-width: unset;
+  padding: 0;
+}
+
+@media (width >= 900px) {
+  .columns.brand > div {
+    gap: 0;
+  }
+
+  .columns.brand > div > div {
+    flex: 1;
+  }
+
+  .columns.brand > div > div:not(.columns-img-col) {
+    padding: var(--spacing-l);
+  }
+
+  .columns.brand > div > .columns-img-col img {
+    min-height: 567px;
+  }
+
+  .columns.brand > div > div a:any-link {
+    min-width: 240px;
   }
 }

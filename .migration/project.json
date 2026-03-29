@@ -1,0 +1,9 @@
+{
+  "type": "xwalk",
+  "contentHostUrl": "author-p35055-e1986322.adobeaemcloud.com",
+  "aemSitePath": "/content/ralphlauren-corporate-sites",
+  "aemAssetsFolderPath": "/content/dam/ralphlauren-corporate-sites",
+  "aemSiteName": "ralphlauren-corporate-sites",
+  "aemSiteTitle": "Ralph Lauren Corporate Sites",
+  "baseUrl": "https://corporate.ralphlauren.com/"
+}
