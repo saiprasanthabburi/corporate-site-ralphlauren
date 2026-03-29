@@ -96,8 +96,8 @@
 
 /* articles variant */
 .cards.articles > ul {
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: var(--spacing-l) var(--spacing-s);
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl) 0;
 }
 
 .cards.articles > ul > li {
@@ -115,12 +115,26 @@
 
 .cards.articles .cards-card-body h3 {
   font-family: var(--heading-font-family);
-  font-size: var(--body-font-size-m);
+  font-size: 24px;
   font-weight: 400;
   text-transform: none;
   letter-spacing: 0;
-  line-height: 1.4;
+  line-height: 1.35;
   margin: 8px 0;
+  color: var(--color-navy);
+}
+
+.cards.articles .cards-card-body .cards-read-more {
+  font-family: var(--mono-font-family);
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--color-navy);
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-navy);
+  padding-bottom: 4px;
+  margin-top: 12px;
+  display: inline-block;
 }
 
 .cards.articles .cards-card-body p:first-child {
@@ -132,7 +146,7 @@
   margin: 0;
 }
 
-.cards.articles .cards-card-body p:last-child {
+.cards.articles .cards-card-body p:last-of-type {
   font-family: var(--mono-font-family);
   font-size: 10px;
   letter-spacing: 2.5px;
@@ -144,9 +158,17 @@
 /* articles filter bar */
 .cards-filter-bar {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   gap: 12px;
   margin-bottom: var(--spacing-l);
+}
+
+.cards-filter-bar .cards-filter-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
 }
 
 .cards-filter-label {
@@ -165,6 +187,7 @@
 .cards-filter-btn {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 8px;
   padding: 10px 16px;
   border: 1px solid var(--color-navy);
@@ -176,7 +199,7 @@
   text-transform: uppercase;
   color: var(--color-navy);
   cursor: pointer;
-  min-width: 100px;
+  width: 100%;
   border-radius: 0;
 }
 
@@ -239,6 +262,25 @@
 
   .cards.articles > ul {
     grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-l) var(--spacing-s);
   }
 
+  .cards.articles .cards-card-body h3 {
+    font-size: var(--body-font-size-m);
+  }
+
+  .cards-filter-bar {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .cards-filter-bar .cards-filter-controls {
+    flex-direction: row;
+    width: auto;
+  }
+
+  .cards-filter-btn {
+    width: auto;
+    min-width: 100px;
+  }
 }

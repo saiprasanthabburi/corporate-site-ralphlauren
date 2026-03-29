@@ -55,8 +55,11 @@ function buildArticleFilters(block, ul) {
   const filterBar = document.createElement('div');
   filterBar.className = 'cards-filter-bar';
   filterBar.innerHTML = '<span class="cards-filter-label">Filter by</span>';
-  filterBar.append(createDropdown('Year', [...years].sort().reverse()));
-  filterBar.append(createDropdown('Topic', [...topics].sort()));
+  const controls = document.createElement('div');
+  controls.className = 'cards-filter-controls';
+  controls.append(createDropdown('Year', [...years].sort().reverse()));
+  controls.append(createDropdown('Topic', [...topics].sort()));
+  filterBar.append(controls);
   block.prepend(filterBar);
 
   filterBar.addEventListener('click', (e) => {
@@ -138,8 +141,15 @@ export default function decorate(block) {
   });
   block.replaceChildren(ul);
 
-  // articles variant: add filter bar
+  // articles variant: add "Read the Story" link and filter bar
   if (block.classList.contains('articles')) {
+    ul.querySelectorAll('.cards-card-body').forEach((body) => {
+      const link = document.createElement('a');
+      link.className = 'cards-read-more';
+      link.href = '#';
+      link.textContent = 'Read the Story';
+      body.append(link);
+    });
     buildArticleFilters(block, ul);
   }
 }
