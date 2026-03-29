@@ -34,7 +34,7 @@
 
 @media (width >= 900px) {
   .quote-container .quote-wrapper {
-    padding: var(--spacing-xxl) var(--spacing-l);
+    padding: var(--spacing-l) var(--spacing-l);
   }
 
   .quote blockquote {
