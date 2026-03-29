@@ -1,0 +1,44 @@
+{
+  "templates": [
+    {
+      "name": "homepage",
+      "urls": [
+        "http://localhost:3000/index.plain.html"
+      ],
+      "description": "Corporate homepage with hero, quote, about us columns, newsroom columns, timeless hero, brands cards, and press hero sections",
+      "blocks": [
+        {
+          "name": "hero",
+          "instances": [
+            ".hero"
+          ]
+        },
+        {
+          "name": "quote",
+          "instances": [
+            ".quote"
+          ]
+        },
+        {
+          "name": "columns-about",
+          "instances": [
+            ".columns.about"
+          ]
+        },
+        {
+          "name": "columns-newsroom",
+          "instances": [
+            ".columns.newsroom"
+          ]
+        },
+        {
+          "name": "cards",
+          "instances": [
+            ".cards"
+          ]
+        }
+      ],
+      "sections": []
+    }
+  ]
+}
