@@ -291,6 +291,12 @@ main > .section:first-of-type {
   }
 }
 
+/* hide empty sections (no child elements) */
+main > .section:not(:has(*)) {
+  display: none;
+  padding: 0;
+}
+
 /* section metadata */
 main .section.light,
 main .section.highlight {
@@ -342,10 +348,4 @@ main .section.dark a:any-link {
 .cta-link:hover {
   text-decoration: none;
   opacity: 0.8;
-}
-
-/* hide empty sections (no child elements) */
-main > .section:not(:has(*)) {
-  display: none;
-  padding: 0;
 }
