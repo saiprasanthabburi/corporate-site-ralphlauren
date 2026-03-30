@@ -125,10 +125,9 @@
 .columns.newsroom > div > div:last-child {
   order: 0;
   display: grid;
-  grid-template: 1fr / 1fr;
-  padding: var(--spacing-l);
-  padding-bottom: 0;
-  overflow: hidden;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  padding: var(--spacing-s) var(--spacing-s) 0;
 }
 
 /* ----------------------------------------------------------------
@@ -232,21 +231,9 @@
   margin: 0 0 4px;
 }
 
-/* newsroom cascading card stack — all items share one grid cell */
-.columns.newsroom > div > div:last-child::before,
+/* newsroom image grid */
 .columns.newsroom > div > div:last-child p {
-  grid-area: 1 / 1;
-  align-self: start;
   margin: 0;
-}
-
-/* back card — navy rectangle */
-.columns.newsroom > div > div:last-child::before {
-  content: '';
-  width: 75%;
-  aspect-ratio: 1;
-  background-color: var(--color-navy);
-  box-shadow: 0 4px 8px rgb(0 0 0 / 25%);
 }
 
 .columns.contact > div > div:first-child h3:first-child {
@@ -279,20 +266,19 @@
   margin: 0 0 var(--spacing-m);
 }
 
-/* middle card — Q1 Report (offset 30px right, 26px down) */
+/* first image — spans left column and overlaps into row 2 */
 .columns.newsroom > div > div:last-child p:first-child {
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
   z-index: 1;
-  width: 75%;
-  margin-top: 26px;
-  margin-left: 30px;
 }
 
-/* front card — Polo 67 (offset 60px right, 46px down) */
+/* second image — offset right, overlaps first image */
 .columns.newsroom > div > div:last-child p:last-child {
-  z-index: 2;
-  width: 75%;
-  margin-top: 46px;
-  margin-left: 60px;
+  grid-column: 1 / -1;
+  grid-row: 2 / 3;
+  z-index: 0;
+  margin-left: 30%;
 }
 
 /* ----------------------------------------------------------------
@@ -322,7 +308,7 @@
 }
 
 .columns.newsroom > div > div:last-child picture img {
-  aspect-ratio: 1;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
   box-shadow: 0 4px 8px rgb(0 0 0 / 25%);
 }

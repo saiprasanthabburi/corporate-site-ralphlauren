@@ -396,12 +396,7 @@ main .section.skyline blockquote {
   max-width: unset;
 }
 
-/* about columns: white background + dark text inside skyline (per Figma) */
-main .section.skyline .columns.about {
-  background-color: var(--color-white);
-  padding: var(--spacing-l);
-}
-
+/* about columns: dark text inside skyline (no background, text only) */
 main .section.skyline .columns.about > div > div > p:first-child {
   color: var(--color-navy);
   opacity: 1;
