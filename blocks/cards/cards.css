@@ -1,7 +1,6 @@
 /* section heading above cards per Figma */
 .cards-container > .default-content-wrapper {
   text-align: left;
-  padding: 0;
   margin-bottom: var(--spacing-s);
 }
 
