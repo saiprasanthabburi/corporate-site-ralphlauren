@@ -396,19 +396,19 @@ main .section.skyline blockquote {
   max-width: unset;
 }
 
-/* about columns: dark text inside skyline (no background, text only) */
+/* about columns: black text inside skyline (no background, text only) */
 main .section.skyline .columns.about > div > div > p:first-child {
-  color: var(--color-navy);
+  color: var(--color-black);
   opacity: 1;
 }
 
 main .section.skyline .columns.about > div > div h2 {
-  color: var(--color-navy);
+  color: var(--color-black);
 }
 
 main .section.skyline .columns.about > div > div a:any-link {
-  color: var(--color-navy);
-  border-bottom-color: var(--color-navy);
+  color: var(--color-black);
+  border-bottom-color: var(--color-black);
 }
 
 /* desktop: About + Newsroom side by side */
