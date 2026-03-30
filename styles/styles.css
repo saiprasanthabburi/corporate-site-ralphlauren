@@ -269,6 +269,11 @@ main > .section:first-of-type {
   padding-top: 0;
 }
 
+/* remove section padding when it wraps an image-only hero */
+main > .section:has(.hero.image-only) {
+  padding: 0;
+}
+
 @media (width >= 900px) {
   main > .section > div {
     padding: 0 var(--spacing-l);
