@@ -369,12 +369,14 @@ main .section.skyline > .default-content-wrapper img {
   object-fit: cover;
 }
 
-/* dark overlay */
+/* dark overlay — gradient: lighter at top (quote area), darker at bottom (columns area) */
 main .section.skyline::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgb(0 0 0 / 55%);
+  background:
+    linear-gradient(to bottom, rgba(0 0 0 / 10%) 0%, rgba(0 0 0 / 50%) 100%),
+    linear-gradient(to right, rgba(0 0 0 / 30%) 0%, rgba(0 0 0 / 0%) 60%);
   z-index: 1;
   pointer-events: none;
 }
@@ -394,6 +396,12 @@ main .section.skyline > .quote-wrapper {
 
 main .section.skyline blockquote {
   max-width: unset;
+}
+
+/* quote text: black per Figma */
+main .section.skyline .quote-wrapper blockquote,
+main .section.skyline .quote-wrapper p {
+  color: var(--color-black);
 }
 
 /* about columns: black text inside skyline (no background, text only) */
