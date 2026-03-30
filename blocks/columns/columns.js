@@ -13,10 +13,13 @@ export default function decorate(block) {
     }
   }
 
-  // auto-detect about variant: columns with "About Us" heading
+  // auto-detect about variant: columns with "Our Company" eyebrow + portrait image
   if (!block.classList.contains('about')) {
-    const h2 = block.querySelector('h2');
-    if (h2 && h2.textContent.trim().toLowerCase() === 'about us') {
+    const firstP = block.querySelector('div > div > p:first-child');
+    const hasCompanyEyebrow = firstP
+      && firstP.textContent.trim().toLowerCase().includes('our company');
+    const hasPic = !!block.querySelector('picture');
+    if (hasCompanyEyebrow && hasPic) {
       block.classList.add('about');
     }
   }
