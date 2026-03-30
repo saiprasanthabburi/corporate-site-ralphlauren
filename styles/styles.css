@@ -396,15 +396,24 @@ main .section.skyline blockquote {
   max-width: unset;
 }
 
-/* about columns white text inside skyline */
+/* about columns: white background + dark text inside skyline (per Figma) */
+main .section.skyline .columns.about {
+  background-color: var(--color-white);
+  padding: var(--spacing-l);
+}
+
 main .section.skyline .columns.about > div > div > p:first-child {
-  color: var(--color-white);
-  opacity: 0.8;
+  color: var(--color-navy);
+  opacity: 1;
+}
+
+main .section.skyline .columns.about > div > div h2 {
+  color: var(--color-navy);
 }
 
 main .section.skyline .columns.about > div > div a:any-link {
-  color: var(--color-white);
-  border-bottom-color: var(--color-white);
+  color: var(--color-navy);
+  border-bottom-color: var(--color-navy);
 }
 
 /* desktop: About + Newsroom side by side */
