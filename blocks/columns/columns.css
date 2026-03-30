@@ -77,7 +77,6 @@
 
 .columns.newsroom > div {
   gap: 0;
-  background-color: var(--color-blue);
 }
 
 .columns.brand > div {

@@ -121,7 +121,7 @@
 @media (width >= 900px) {
   .hero {
     justify-content: flex-end;
-    min-height: 462px;
+    min-height: 700px;
     padding: var(--spacing-xl) var(--spacing-l);
   }
 
