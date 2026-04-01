@@ -44,11 +44,13 @@
 
 .hero > div {
   position: absolute;
-  bottom: var(--spacing-l);
-  transform: none;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
   z-index: 2;
   max-width: 100%;
-  padding: 0 var(--spacing-s);
+  padding: 0 var(--spacing-l);
   box-sizing: border-box;
 }
 
@@ -137,13 +139,13 @@
   }
 
   .hero > div {
-    bottom: var(--spacing-xl);
-    padding: 0 var(--spacing-l);
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0 80px;
   }
 
   .hero h1 {
     font-size: 44px;
-    max-width: 700px;
   }
 
   .hero h2 {
