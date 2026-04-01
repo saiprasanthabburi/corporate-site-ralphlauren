@@ -12,10 +12,10 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   box-sizing: border-box;
-  min-height: 380px;
-  padding: var(--spacing-l) var(--spacing-s);
+  min-height: 0;
+  padding: 0;
   overflow: hidden;
 }
 
@@ -29,24 +29,27 @@
 }
 
 .hero picture {
-  position: absolute;
+  position: relative;
   z-index: 0;
-  inset: 0;
+  width: 100%;
+  display: block;
 }
 
 .hero img {
-  object-fit: cover;
   width: 100%;
-  height: 100%;
-  object-position: center center;
+  height: auto;
+  display: block;
+  object-fit: unset;
 }
 
 .hero > div {
-  position: relative;
+  position: absolute;
+  bottom: var(--spacing-l);
+  transform: none;
   z-index: 2;
-  max-width: 1340px;
-  margin: auto auto;
-  width: 100%;
+  max-width: 100%;
+  padding: 0 var(--spacing-s);
+  box-sizing: border-box;
 }
 
 .hero h1,
@@ -122,19 +125,25 @@
 }
 
 .hero.image-only {
-  min-height: 462px;
+  min-height: 0;
   padding: 0;
 }
 
 @media (width >= 900px) {
   .hero {
-    justify-content: flex-end;
-    min-height: 440px;
-    padding: var(--spacing-xl) var(--spacing-l);
+    justify-content: unset;
+    min-height: 0;
+    padding: 0;
+  }
+
+  .hero > div {
+    bottom: var(--spacing-xl);
+    padding: 0 var(--spacing-l);
   }
 
   .hero h1 {
     font-size: 44px;
+    max-width: 700px;
   }
 
   .hero h2 {

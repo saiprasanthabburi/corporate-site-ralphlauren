@@ -367,7 +367,7 @@ header nav .nav-search svg {
 @media (width >= 900px) {
   header nav .nav-search {
     position: absolute;
-    top: 20px;
+    top: 25px;
     right: 20px;
   }
 
