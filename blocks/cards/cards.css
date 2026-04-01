@@ -162,12 +162,11 @@
   align-items: flex-start;
   gap: 16px;
   margin-bottom: var(--spacing-l);
-  margin-top: 0;
 }
 
 .cards-filter-bar .cards-filter-controls {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 10px;
   width: 100%;
 }
@@ -185,7 +184,6 @@
 
 .cards-filter-group {
   position: relative;
-  width: 100%;
 }
 
 .cards-filter-btn {
@@ -205,7 +203,7 @@
   cursor: pointer;
   width: 100%;
   border-radius: 0;
-  height: 44px;
+  height: 60px;
   box-sizing: border-box;
 }
 
@@ -286,57 +284,8 @@
     gap: 16px;
   }
 
-  .cards-filter-group {
-    width: auto;
-    flex: 1;
-  }
-
   .cards-filter-btn {
     width: 100%;
     min-width: 180px;
-    height: 60px;
-    padding: 18px 40px;
-  }
-}
-@media (width < 900px) {
-  .cards-wrapper,
-  .cards-container {
-    margin-top: -180px;
-    position: relative;
-    z-index: 3;
-    background-color: transparent;
-  }
-
-  .cards-filter-bar {
-    background-color: transparent;
-    padding: 0 16px;
-    margin-bottom: 16px;
-  }
-
-  .cards-filter-label {
-    color: var(--color-white);
-  }
-
-  .cards-filter-group {
-    width: 100%;
-  }
-
-  .cards-filter-btn {
-    background-color: transparent;
-    border: 1px solid var(--color-white);
-    color: var(--color-white);
-    height: 44px;
-    padding: 10px 16px;
-    width: 100%;
-  }
-
-  .cards-filter-arrow {
-    color: var(--color-white);
-  }
-
-  /* cards grid starts with white background below hero */
-  .cards.articles > ul {
-    background-color: var(--background-color);
-    padding-top: var(--spacing-s);
   }
 }
