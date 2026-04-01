@@ -301,29 +301,42 @@
 @media (width < 900px) {
   .cards-wrapper,
   .cards-container {
-    margin-top: -120px;        /* pull cards up to overlap hero */
+    margin-top: -180px;
     position: relative;
-    z-index: 3;                /* sit above hero image */
+    z-index: 3;
+    background-color: transparent;
   }
 
   .cards-filter-bar {
-    background-color: transparent;  /* transparent so hero shows behind */
+    background-color: transparent;
     padding: 0 16px;
+    margin-bottom: 16px;
   }
 
   .cards-filter-label {
-    color: var(--color-white);      /* white text over dark hero image */
+    color: var(--color-white);
+  }
+
+  .cards-filter-group {
+    width: 100%;
   }
 
   .cards-filter-btn {
-    background-color: transparent;  /* transparent button */
+    background-color: transparent;
     border: 1px solid var(--color-white);
-    color: var(--color-white);      /* white text */
+    color: var(--color-white);
     height: 44px;
     padding: 10px 16px;
+    width: 100%;
   }
 
   .cards-filter-arrow {
     color: var(--color-white);
+  }
+
+  /* cards grid starts with white background below hero */
+  .cards.articles > ul {
+    background-color: var(--background-color);
+    padding-top: var(--spacing-s);
   }
 }
