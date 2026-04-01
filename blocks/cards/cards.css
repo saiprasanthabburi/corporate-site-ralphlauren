@@ -162,6 +162,7 @@
   align-items: flex-start;
   gap: 16px;
   margin-bottom: var(--spacing-l);
+  margin-top: 0;
 }
 
 .cards-filter-bar .cards-filter-controls {
