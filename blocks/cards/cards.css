@@ -147,7 +147,7 @@
 }
 
 .cards.articles .cards-card-body p:last-of-type {
-  font-family: var(--heading-font-family);
+  font-family: var(--newsroom-card-date-family);
   font-size: 16px;
   letter-spacing: 0.25px;
   text-transform: uppercase;
