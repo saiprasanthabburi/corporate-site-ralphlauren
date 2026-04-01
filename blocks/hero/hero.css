@@ -153,3 +153,27 @@
     line-height: 52px;
   }
 }
+
+@media (width < 900px) {
+  .hero > div {
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0 var(--spacing-s);
+  }
+
+  .hero h1 {
+    font-size: 28px;
+    line-height: 1.2;
+    max-width: 100%;
+  }
+
+  .hero h2 {
+    font-size: 22px;
+    line-height: 1.3;
+  }
+
+  .hero p:first-child {
+    font-size: 10px;
+    letter-spacing: 0.8px;
+  }
+}
