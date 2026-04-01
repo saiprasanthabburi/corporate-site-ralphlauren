@@ -111,7 +111,7 @@
   font-weight: 500;
   letter-spacing: 2px;
   text-transform: uppercase;
-  width: 177px;
+  min-width: 177px;
   height: 43px;
   padding: 0;
 }

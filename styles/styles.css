@@ -5,7 +5,7 @@
 
 :root {
   /* colors */
-  --color-navy: #041e3a;
+  --color-navy: #041E3A;
   --color-white: #fff;
   --color-black: #000;
   --color-light-gray: #f4f2f3;
@@ -22,7 +22,7 @@
   /* fonts */
   --heading-font-family: 'le-jeune-deck', georgia, 'Times New Roman', serif;
   --body-font-family: 'founders-grotesk-text', arial, helvetica, sans-serif;
-  --mono-font-family: 'founders-grotesk-mono', 'Courier New', monospace;
+  --mono-font-family: 'Founders Grotesk Mono Regular',Arial,Helvetica,sans-serif;
 
   /* body sizes */
   --body-font-size-m: 16px;
