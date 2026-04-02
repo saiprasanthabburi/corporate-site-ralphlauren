@@ -36,8 +36,9 @@
   width: 100%;
   height: auto;
   display: block;
-  object-fit: unset;
-  object-position: unset;
+  min-height: 400px;
+  object-fit: cover;
+  object-position: center center;
 }
 
 .hero > div {
@@ -125,6 +126,12 @@
 }
 
 @media (width >= 900px) {
+  .hero img {
+    min-height: unset;
+    object-fit: unset;
+    object-position: unset;
+  }
+
   .hero > div {
     top: 50%;
     bottom: unset;
