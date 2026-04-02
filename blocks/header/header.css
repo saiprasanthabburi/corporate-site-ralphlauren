@@ -1,4 +1,7 @@
 /* header and nav layout */
+header {
+  height: auto;
+}
 header .nav-wrapper {
   background-color: var(--background-color);
   width: 100%;
