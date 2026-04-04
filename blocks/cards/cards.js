@@ -149,10 +149,30 @@ export default function decorate(block) {
     const li = document.createElement('li');
     moveInstrumentation(row, li);
     while (row.firstElementChild) li.append(row.firstElementChild);
-    [...li.children].forEach((div) => {
-      if (div.children.length === 1 && div.querySelector('picture')) div.className = 'cards-card-image';
-      else div.className = 'cards-card-body';
+    const divs = [...li.children];
+    // first two divs are image + body; extras are CTA fields (text, url)
+    divs.forEach((div, idx) => {
+      if (idx === 0 && div.children.length === 1 && div.querySelector('picture')) {
+        div.className = 'cards-card-image';
+      } else if (idx === 1) {
+        div.className = 'cards-card-body';
+      }
     });
+    // merge CTA fields (3rd = text, 4th = url) into the body as a link
+    if (divs.length > 2) {
+      const body = li.querySelector('.cards-card-body');
+      const ctaText = divs[2]?.textContent.trim();
+      const ctaUrl = divs[3]?.textContent.trim();
+      if (body && ctaText) {
+        const link = document.createElement('a');
+        link.className = 'cards-read-more';
+        link.href = ctaUrl || '#';
+        link.textContent = ctaText;
+        body.append(link);
+      }
+      // remove extra divs
+      for (let i = divs.length - 1; i >= 2; i -= 1) divs[i].remove();
+    }
     ul.append(li);
   });
   ul.querySelectorAll('picture > img').forEach((img) => {
@@ -168,15 +188,19 @@ export default function decorate(block) {
   // articles variant: style authored CTA links or add default
   if (block.classList.contains('articles')) {
     ul.querySelectorAll('.cards-card-body').forEach((body) => {
-      const existingLink = body.querySelector('a');
-      if (existingLink) {
-        existingLink.classList.add('cards-read-more');
-      } else {
-        const link = document.createElement('a');
-        link.className = 'cards-read-more';
-        link.href = '#';
-        link.textContent = 'Read the Story';
-        body.append(link);
+      const existingLink = body.querySelector('a.cards-read-more');
+      if (!existingLink) {
+        // check for an inline authored link
+        const inlineLink = body.querySelector('a');
+        if (inlineLink) {
+          inlineLink.classList.add('cards-read-more');
+        } else {
+          const link = document.createElement('a');
+          link.className = 'cards-read-more';
+          link.href = '#';
+          link.textContent = 'Read the Story';
+          body.append(link);
+        }
       }
     });
     buildArticleFilters(block, ul);
