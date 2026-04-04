@@ -8,15 +8,16 @@
  *   | Year    | 2024, 2023, 2022                       |
  *   | Topic   | Financial, Corporate, Style & Strategy  |
  *
- * Single-column (positional – row 1 = Year, row 2 = Topic):
+ * Single-column (positional – row 1 = Year, row 2 = Topic, row 3 = CTA):
  *   | Filters                                          |
  *   | 2024, 2023, 2022                                 |
  *   | Financial, Corporate, Style & Strategy            |
+ *   | Read the Story                                    |
  *
  * The block hides itself and exposes the parsed config via a data attribute
  * so the cards (articles) block can read it.
  */
-const DEFAULT_KEYS = ['year', 'topic'];
+const DEFAULT_KEYS = ['year', 'topic', 'cta'];
 
 export default function decorate(block) {
   const config = {};

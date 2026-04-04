@@ -165,13 +165,15 @@ export default function decorate(block) {
   });
   block.replaceChildren(ul);
 
-  // articles variant: add "Read the Story" link and filter bar
+  // articles variant: add CTA link and filter bar
   if (block.classList.contains('articles')) {
+    const authorConfig = getAuthorFilterConfig(block);
+    const ctaText = authorConfig?.cta?.[0] || 'Read the Story';
     ul.querySelectorAll('.cards-card-body').forEach((body) => {
       const link = document.createElement('a');
       link.className = 'cards-read-more';
       link.href = '#';
-      link.textContent = 'Read the Story';
+      link.textContent = ctaText;
       body.append(link);
     });
     buildArticleFilters(block, ul);
