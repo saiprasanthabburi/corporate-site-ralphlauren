@@ -48,6 +48,20 @@
           "value": "",
           "label": "Text",
           "valueType": "string"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "ctaText",
+          "label": "CTA Text",
+          "description": "Link text displayed on the card (e.g. Read the Story)"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "ctaUrl",
+          "label": "CTA URL",
+          "description": "Link URL for the card CTA"
         }
       ]
     }

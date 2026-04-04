@@ -165,16 +165,19 @@ export default function decorate(block) {
   });
   block.replaceChildren(ul);
 
-  // articles variant: add CTA link and filter bar
+  // articles variant: style authored CTA links or add default
   if (block.classList.contains('articles')) {
-    const authorConfig = getAuthorFilterConfig(block);
-    const ctaText = authorConfig?.cta?.[0] || 'Read the Story';
     ul.querySelectorAll('.cards-card-body').forEach((body) => {
-      const link = document.createElement('a');
-      link.className = 'cards-read-more';
-      link.href = '#';
-      link.textContent = ctaText;
-      body.append(link);
+      const existingLink = body.querySelector('a');
+      if (existingLink) {
+        existingLink.classList.add('cards-read-more');
+      } else {
+        const link = document.createElement('a');
+        link.className = 'cards-read-more';
+        link.href = '#';
+        link.textContent = 'Read the Story';
+        body.append(link);
+      }
     });
     buildArticleFilters(block, ul);
   }
