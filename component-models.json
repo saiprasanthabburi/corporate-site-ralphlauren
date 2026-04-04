@@ -180,6 +180,25 @@
     ]
   },
   {
+    "id": "filter",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "name",
+        "label": "Filter Name",
+        "description": "The filter dimension name (e.g. Year, Topic)"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "values",
+        "label": "Filter Values",
+        "description": "Comma-separated list of filter options (e.g. 2024, 2023, 2022)"
+      }
+    ]
+  },
+  {
     "id": "fragment",
     "fields": [
       {

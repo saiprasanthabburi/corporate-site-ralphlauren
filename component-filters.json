@@ -15,6 +15,7 @@
       "hero",
       "cards",
       "columns",
+      "filters",
       "fragment"
     ]
   },
@@ -37,6 +38,12 @@
       "image",
       "button",
       "title"
+    ]
+  },
+  {
+    "id": "filters",
+    "components": [
+      "filter"
     ]
   }
 ]
