@@ -136,6 +136,14 @@
           {
             "name": "Highlight",
             "value": "highlight"
+          },
+          {
+            "name": "Link Style: Underline",
+            "value": "link-underline"
+          },
+          {
+            "name": "Link Style: Box",
+            "value": "link-box"
           }
         ]
       }
