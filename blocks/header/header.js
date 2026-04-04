@@ -181,4 +181,21 @@ export default async function decorate(block) {
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(nav);
   block.append(navWrapper);
+
+  // live stock ticker
+  const tickerEl = nav.querySelector('.nav-tools p');
+  if (tickerEl) {
+    try {
+      const resp = await fetch('https://corporate.ralphlauren.com/on/demandware.store/Sites-RalphLauren_Corporate-Site/default/StockTicker-GetStockTicker');
+      if (resp.ok) {
+        const raw = await resp.text();
+        const parts = raw.replace(/"/g, '').split(',').map((s) => s.trim());
+        if (parts.length >= 3) {
+          tickerEl.textContent = `${parts[0]} ${parts[1]} $${parts[2]}`;
+        }
+      }
+    } catch (e) {
+      /* keep authored fallback value */
+    }
+  }
 }
