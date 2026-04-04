@@ -249,7 +249,8 @@
 }
 
 .cards-filter-option:hover {
-  background-color: var(--color-light-gray);
+  background-color: var(--color-navy);
+  color: var(--color-white);
 }
 
 .cards-filter-option.active {
@@ -259,8 +260,7 @@
 
 @media (width >= 480px) {
   .cards-filter-bar .cards-filter-controls {
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
   }
 
   .cards-filter-group {
@@ -292,8 +292,7 @@
   }
 
   .cards-filter-bar .cards-filter-controls {
-    flex-direction: row;
-    flex-wrap: nowrap;
+    flex-flow: row nowrap;
     width: 100%;
     gap: 16px;
   }
