@@ -191,7 +191,7 @@ export default async function decorate(block) {
         const raw = await resp.text();
         const parts = raw.replace(/"/g, '').split(',').map((s) => s.trim());
         if (parts.length >= 3) {
-          tickerEl.textContent = `${parts[0]} ${parts[1]} $${parts[2]}`;
+          tickerEl.innerHTML = `<strong>${parts[0]}</strong> ${parts[1]} $${parts[2]}`;
         }
       }
     } catch (e) {
