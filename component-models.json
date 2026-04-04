@@ -231,6 +231,25 @@
         "value": "",
         "label": "Text",
         "valueType": "string"
+      },
+      {
+        "component": "select",
+        "name": "classes",
+        "label": "Text Position",
+        "options": [
+          {
+            "name": "Bottom",
+            "value": "bottom"
+          },
+          {
+            "name": "Middle",
+            "value": "middle"
+          },
+          {
+            "name": "Top",
+            "value": "top"
+          }
+        ]
       }
     ]
   },

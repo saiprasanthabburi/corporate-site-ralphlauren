@@ -125,6 +125,31 @@
   padding: 0;
 }
 
+/* text position variants — mobile always bottom, desktop configurable */
+
+/* top */
+.hero.top > div {
+  bottom: unset;
+  top: 0;
+}
+
+.hero.top::after {
+  background: linear-gradient(180deg, rgb(0 0 0 / 70%) 0%, rgb(0 0 0 / 0%) 56%);
+}
+
+/* middle */
+.hero.middle > div {
+  bottom: unset;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.hero.middle::after {
+  background: rgb(0 0 0 / 30%);
+}
+
+/* bottom (default — same as base styles) */
+
 @media (width >= 900px) {
   .hero img {
     min-height: unset;
@@ -133,10 +158,24 @@
   }
 
   .hero > div {
-    top: 50%;
-    bottom: unset;
-    transform: translateY(-50%);
+    bottom: 0;
     padding: 0 80px;
+    padding-bottom: var(--spacing-l);
+  }
+
+  .hero.top > div {
+    bottom: unset;
+    top: 0;
+    padding-top: var(--spacing-l);
+    padding-bottom: 0;
+  }
+
+  .hero.middle > div {
+    bottom: unset;
+    top: 50%;
+    transform: translateY(-50%);
+    padding-top: 0;
+    padding-bottom: 0;
   }
 
   .hero h1 {
