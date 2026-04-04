@@ -209,7 +209,8 @@
 }
 
 .cards-filter-btn:hover {
-  background-color: var(--color-light-gray);
+  background-color: var(--color-navy);
+  color: var(--color-white);
 }
 
 .cards-filter-arrow {
