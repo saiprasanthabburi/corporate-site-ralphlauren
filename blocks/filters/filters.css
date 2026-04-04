@@ -1,0 +1,4 @@
+/* filters block is invisible — config only */
+.filters-wrapper {
+  display: none;
+}

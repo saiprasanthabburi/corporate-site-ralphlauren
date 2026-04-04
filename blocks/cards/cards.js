@@ -35,30 +35,54 @@ function applyFilters(ul, filterBar) {
   });
 }
 
-function buildArticleFilters(block, ul) {
-  const cards = [...ul.querySelectorAll('li')];
-  const topics = new Set();
-  const years = new Set();
+function getAuthorFilterConfig(block) {
+  const section = block.closest('.section');
+  const filtersBlock = section?.querySelector('.filters[data-filter-config]');
+  if (!filtersBlock) return null;
+  try {
+    return JSON.parse(filtersBlock.dataset.filterConfig);
+  } catch (e) {
+    return null;
+  }
+}
 
-  cards.forEach((card) => {
-    const body = card.querySelector('.cards-card-body');
-    if (!body) return;
-    const category = body.querySelector('p:first-child');
-    const date = body.querySelector('p:last-child');
-    if (category) topics.add(category.textContent.trim());
-    if (date) {
-      const match = date.textContent.trim().match(/\d{4}/);
-      if (match) years.add(match[0]);
-    }
-  });
+function buildArticleFilters(block, ul) {
+  const authorConfig = getAuthorFilterConfig(block);
+
+  let yearOptions;
+  let topicOptions;
+
+  if (authorConfig) {
+    yearOptions = authorConfig.year || [];
+    topicOptions = authorConfig.topic || [];
+  } else {
+    const cards = [...ul.querySelectorAll('li')];
+    const topics = new Set();
+    const years = new Set();
+
+    cards.forEach((card) => {
+      const body = card.querySelector('.cards-card-body');
+      if (!body) return;
+      const category = body.querySelector('p:first-child');
+      const date = body.querySelector('p:last-child');
+      if (category) topics.add(category.textContent.trim());
+      if (date) {
+        const match = date.textContent.trim().match(/\d{4}/);
+        if (match) years.add(match[0]);
+      }
+    });
+
+    yearOptions = [...years].sort().reverse();
+    topicOptions = [...topics].sort();
+  }
 
   const filterBar = document.createElement('div');
   filterBar.className = 'cards-filter-bar';
   filterBar.innerHTML = '<span class="cards-filter-label">Filter by</span>';
   const controls = document.createElement('div');
   controls.className = 'cards-filter-controls';
-  controls.append(createDropdown('Year', [...years].sort().reverse()));
-  controls.append(createDropdown('Topic', [...topics].sort()));
+  controls.append(createDropdown('Year', yearOptions));
+  controls.append(createDropdown('Topic', topicOptions));
   filterBar.append(controls);
   block.prepend(filterBar);
 
