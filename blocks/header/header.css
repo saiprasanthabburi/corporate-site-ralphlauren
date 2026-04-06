@@ -36,9 +36,25 @@ header nav p {
   line-height: 1;
 }
 
-header nav a:any-link {
+header nav a:any-link,
+header nav a.button:any-link {
+  display: inline;
   color: currentcolor;
   text-decoration: none;
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  min-width: unset;
+  height: auto;
+  overflow: visible;
+  white-space: normal;
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  line-height: inherit;
 }
 
 header nav a:hover {
