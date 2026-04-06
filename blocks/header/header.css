@@ -341,10 +341,8 @@ header nav .nav-tools {
     display: none;
     position: absolute;
     left: 0;
-    right: 0;
     top: calc(100% + 1px);
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
+    width: 50%;
     padding: 10px 40px 0;
     background-color: var(--background-color);
     white-space: initial;
