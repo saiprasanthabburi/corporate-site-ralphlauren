@@ -338,16 +338,20 @@ header nav .nav-tools {
 
   /* active underline at bottom of nav bar */
   header nav .nav-sections .default-content-wrapper > ul > li.nav-drop:hover {
-    border-bottom: 3px solid var(--color-navy);
+    text-decoration-line: underline;
+    text-underline-offset: 17px;
+    text-decoration-thickness: 2.5px;
+    text-decoration-color: var(--color-navy, navy);
+    border-bottom: none;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul {
     display: none;
     position: absolute;
     left: -40px;
-    top: calc(100% + 1px);
+    top: calc(100% + 5px);
     width: 250px;
-    padding: 10px 40px 0;
+    padding: 10px 16px 0;
     background-color: var(--background-color);
     white-space: initial;
     z-index: 10;
