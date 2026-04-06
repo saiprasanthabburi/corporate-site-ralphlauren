@@ -146,16 +146,18 @@ export default async function decorate(block) {
       if (subMenu) {
         navSection.classList.add('nav-drop');
         navSection.addEventListener('click', (e) => {
-          // prevent parent link navigation on desktop, toggle dropdown
-          const parentLink = navSection.querySelector(':scope > a');
-          if (e.target === parentLink || e.target === navSection) {
-            e.preventDefault();
+          if (!isDesktop.matches) {
+            // mobile: toggle dropdown on click
+            const parentLink = navSection.querySelector(':scope > a');
+            if (e.target === parentLink || e.target === navSection) {
+              e.preventDefault();
+            }
+            if (subMenu.contains(e.target)) return;
+            const expanded = navSection.getAttribute('aria-expanded') === 'true';
+            toggleAllNavSections(navSections);
+            navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
           }
-          // don't toggle when clicking a sub-menu link
-          if (subMenu.contains(e.target)) return;
-          const expanded = navSection.getAttribute('aria-expanded') === 'true';
-          toggleAllNavSections(navSections);
-          navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+          // desktop: hover handles dropdown via CSS, clicks navigate
         });
       }
     });
