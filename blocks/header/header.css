@@ -195,7 +195,7 @@ header nav[aria-expanded='true'] .nav-sections {
   display: block;
   visibility: visible;
   align-self: start;
-  padding: 16px 0;
+  padding: 1.25rem 0;
 }
 
 header nav .nav-sections ul {
@@ -217,7 +217,7 @@ header nav .nav-sections ul > li {
 }
 
 header nav .nav-sections ul > li > ul {
-  margin-top: 8px;
+  /* margin-top: 8px; */
   padding-left: 12px;
 }
 
@@ -333,7 +333,7 @@ header nav .nav-tools {
     flex: 0 1 auto;
     position: static;
     padding-bottom: 14px;
-    margin-bottom: -14px;
+    margin-bottom: -17px;
   }
 
   /* active underline at bottom of nav bar */
@@ -344,7 +344,7 @@ header nav .nav-tools {
   header nav .nav-sections .default-content-wrapper > ul > li > ul {
     display: none;
     position: absolute;
-    left: 0;
+    left: -20px;
     top: calc(100% + 1px);
     width: 250px;
     padding: 10px 40px 0;
@@ -360,7 +360,7 @@ header nav .nav-tools {
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     padding: 24px 0;
-    border-bottom: 1px solid var(--color-light-gray);
+    /* border-bottom: 1px solid var(--color-light-gray); */
     width: 100%;
     font-weight: 400;
   }
