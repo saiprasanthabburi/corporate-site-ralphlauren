@@ -288,6 +288,7 @@ header nav .nav-tools {
     width: 100%;
     padding: 14px 0;
     border-bottom: 1px solid var(--color-mid-gray);
+    position: relative;
   }
 
   header nav[aria-expanded='true'] .nav-sections {
@@ -326,36 +327,49 @@ header nav .nav-tools {
 
   header nav .nav-sections .default-content-wrapper > ul > li {
     flex: 0 1 auto;
-    position: relative;
+    position: static;
     padding: 8px 0;
+  }
+
+  /* active underline on hovered parent */
+  header nav .nav-sections .default-content-wrapper > ul > li.nav-drop:hover {
+    border-bottom: 3px solid var(--color-navy);
+    margin-bottom: -3px;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul {
     display: none;
     position: absolute;
-    left: -24px;
-    width: 200px;
+    left: 0;
+    right: 0;
     top: 100%;
-    padding: 16px;
+    width: 100%;
+    padding: 20px 24px 24px;
     background-color: var(--background-color);
     white-space: initial;
     z-index: 10;
-    box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
+    border-top: 1px solid var(--color-mid-gray);
+    border-bottom: 1px solid var(--color-mid-gray);
+    box-sizing: border-box;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
   }
 
-  /* invisible bridge to prevent hover gap */
-  header nav .nav-sections .default-content-wrapper > ul > li > ul::before {
-    content: '';
-    position: absolute;
-    top: -10px;
-    left: 0;
+  header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--color-light-gray);
     width: 100%;
-    height: 10px;
+    font-weight: 400;
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li > ul > li:last-child {
+    border-bottom: none;
   }
 
   /* show on hover */
   header nav .nav-sections .default-content-wrapper > ul > li:hover > ul {
-    display: block;
+    display: flex;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
