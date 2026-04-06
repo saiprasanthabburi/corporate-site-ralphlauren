@@ -75,7 +75,6 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
   toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
   button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
-
   // enable nav dropdown keyboard accessibility
   const navDrops = navSections.querySelectorAll('.nav-drop');
   if (isDesktop.matches) {
@@ -94,38 +93,13 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
 
   // enable menu collapse on escape keypress
   if (!expanded || isDesktop.matches) {
+    // collapse menu on escape press
     window.addEventListener('keydown', closeOnEscape);
+    // collapse menu on focus lost
     nav.addEventListener('focusout', closeOnFocusLost);
   } else {
     window.removeEventListener('keydown', closeOnEscape);
     nav.removeEventListener('focusout', closeOnFocusLost);
-  }
-}
-
-/**
- * Fetches stock ticker value and updates all ticker elements
- * @param {Element} nav
- */
-async function loadTicker(nav) {
-  try {
-    const resp = await fetch('https://corporate.ralphlauren.com/on/demandware.store/Sites-RalphLauren_Corporate-Site/default/StockTicker-GetStockTicker');
-    if (resp.ok) {
-      const raw = await resp.text();
-      const parts = raw.replace(/"/g, '').split(',').map((s) => s.trim());
-      if (parts.length >= 3) {
-        const tickerHTML = `<strong>${parts[0]}</strong> ${parts[1]} $${parts[2]}`;
-
-        // desktop ticker
-        const desktopTicker = nav.querySelector('.nav-tools p');
-        if (desktopTicker) desktopTicker.innerHTML = tickerHTML;
-
-        // mobile ticker
-        const mobileTicker = nav.querySelector('.nav-mobile-ticker-text');
-        if (mobileTicker) mobileTicker.innerHTML = tickerHTML;
-      }
-    }
-  } catch (e) {
-    /* keep authored fallback value */
   }
 }
 
@@ -173,12 +147,11 @@ export default async function decorate(block) {
         navSection.classList.add('nav-drop');
         navSection.addEventListener('click', (e) => {
           if (!isDesktop.matches) {
-            // mobile: toggle accordion on click
+            // mobile: toggle dropdown on click
             const parentLink = navSection.querySelector(':scope > a');
             if (e.target === parentLink || e.target === navSection) {
               e.preventDefault();
             }
-            // if click is inside the submenu itself, let it navigate
             if (subMenu.contains(e.target)) return;
             const expanded = navSection.getAttribute('aria-expanded') === 'true';
             toggleAllNavSections(navSections);
@@ -199,7 +172,6 @@ export default async function decorate(block) {
   hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
   nav.prepend(hamburger);
   nav.setAttribute('aria-expanded', 'false');
-
   // prevent mobile nav behavior on window resize
   toggleMenu(nav, navSections, isDesktop.matches);
   isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
@@ -215,17 +187,25 @@ export default async function decorate(block) {
   </a>`;
   nav.append(searchIcon);
 
-  // mobile ticker bar — dark strip at bottom of nav overlay
-  const mobileTicker = document.createElement('div');
-  mobileTicker.classList.add('nav-mobile-ticker');
-  mobileTicker.innerHTML = `<p class="nav-mobile-ticker-text">NYSE RL</p>`;
-  nav.append(mobileTicker);
-
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(nav);
   block.append(navWrapper);
 
-  // load stock ticker for both desktop and mobile
-  await loadTicker(nav);
+  // live stock ticker
+  const tickerEl = nav.querySelector('.nav-tools p');
+  if (tickerEl) {
+    try {
+      const resp = await fetch('https://corporate.ralphlauren.com/on/demandware.store/Sites-RalphLauren_Corporate-Site/default/StockTicker-GetStockTicker');
+      if (resp.ok) {
+        const raw = await resp.text();
+        const parts = raw.replace(/"/g, '').split(',').map((s) => s.trim());
+        if (parts.length >= 3) {
+          tickerEl.innerHTML = `<strong>${parts[0]}</strong> ${parts[1]} $${parts[2]}`;
+        }
+      }
+    } catch (e) {
+      /* keep authored fallback value */
+    }
+  }
 }
