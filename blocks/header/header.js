@@ -38,7 +38,7 @@ function closeOnFocusLost(e) {
 
 function openOnKeydown(e) {
   const focused = document.activeElement;
-  const isNavDrop = focused.classList.contains('nav-drop');
+  const isNavDrop = focused.className === 'nav-drop';
   if (isNavDrop && (e.code === 'Enter' || e.code === 'Space')) {
     const dropExpanded = focused.getAttribute('aria-expanded') === 'true';
     // eslint-disable-next-line no-use-before-define
@@ -57,7 +57,7 @@ function focusNavSection() {
  * @param {Boolean} expanded Whether the element should be expanded or collapsed
  */
 function toggleAllNavSections(sections, expanded = false) {
-  sections.querySelectorAll('.nav-drop').forEach((section) => {
+  sections.querySelectorAll('.nav-sections .default-content-wrapper > ul > li').forEach((section) => {
     section.setAttribute('aria-expanded', expanded);
   });
 }
@@ -75,7 +75,6 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
   toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
   button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
-
   // enable nav dropdown keyboard accessibility
   const navDrops = navSections.querySelectorAll('.nav-drop');
   if (isDesktop.matches) {
@@ -94,7 +93,9 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
 
   // enable menu collapse on escape keypress
   if (!expanded || isDesktop.matches) {
+    // collapse menu on escape press
     window.addEventListener('keydown', closeOnEscape);
+    // collapse menu on focus lost
     nav.addEventListener('focusout', closeOnFocusLost);
   } else {
     window.removeEventListener('keydown', closeOnEscape);
@@ -107,10 +108,12 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
  * @param {Element} block The header block element
  */
 export default async function decorate(block) {
+  // load nav as fragment
   const navMeta = getMetadata('nav');
   const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
   const fragment = await loadFragment(navPath);
 
+  // decorate nav DOM
   block.textContent = '';
   const nav = document.createElement('nav');
   nav.id = 'nav';
@@ -129,6 +132,7 @@ export default async function decorate(block) {
     brandLink.closest('.button-container').className = '';
   }
 
+  // fallback: add brand text when logo image is missing
   const brandAnchor = navBrand.querySelector('a');
   if (brandAnchor && !brandAnchor.querySelector('img') && !brandAnchor.textContent.trim()) {
     brandAnchor.textContent = 'Ralph Lauren Corporation';
@@ -143,25 +147,17 @@ export default async function decorate(block) {
         navSection.classList.add('nav-drop');
         navSection.addEventListener('click', (e) => {
           if (!isDesktop.matches) {
-            // Check if user clicked the parent button/link to toggle the menu
-            // If they clicked an actual link in the sub-menu, let it navigate
-            const isSubMenuClick = subMenu.contains(e.target);
-            if (!isSubMenuClick) {
+            // mobile: toggle dropdown on click
+            const parentLink = navSection.querySelector(':scope > a');
+            if (e.target === parentLink || e.target === navSection) {
               e.preventDefault();
-              e.stopPropagation();
-              const expanded = navSection.getAttribute('aria-expanded') === 'true';
-
-              // Accordion: close all other nav-drops first
-              navSections.querySelectorAll('.nav-drop').forEach((item) => {
-                if (item !== navSection) {
-                  item.setAttribute('aria-expanded', 'false');
-                }
-              });
-
-              // Toggle the current one
-              navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
             }
+            if (subMenu.contains(e.target)) return;
+            const expanded = navSection.getAttribute('aria-expanded') === 'true';
+            toggleAllNavSections(navSections);
+            navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
           }
+          // desktop: hover handles dropdown via CSS, clicks navigate
         });
       }
     });
@@ -176,10 +172,11 @@ export default async function decorate(block) {
   hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
   nav.prepend(hamburger);
   nav.setAttribute('aria-expanded', 'false');
-
+  // prevent mobile nav behavior on window resize
   toggleMenu(nav, navSections, isDesktop.matches);
   isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
 
+  // search icon
   const searchIcon = document.createElement('div');
   searchIcon.classList.add('nav-search');
   searchIcon.innerHTML = `<a href="/search" aria-label="Search">
@@ -207,6 +204,8 @@ export default async function decorate(block) {
           tickerEl.innerHTML = `<strong>${parts[0]}</strong> ${parts[1]} $${parts[2]}`;
         }
       }
-    } catch (e) { /* fallback content remains */ }
+    } catch (e) {
+      /* keep authored fallback value */
+    }
   }
 }
