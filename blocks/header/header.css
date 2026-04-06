@@ -60,6 +60,7 @@ header nav a.button:any-link {
 header nav a:hover {
   text-decoration: none;
   opacity: 0.8;
+  font-weight: bolder;
 }
 
 /* hamburger */
@@ -349,9 +350,9 @@ header nav .nav-tools {
     display: none;
     position: absolute;
     left: -40px;
-    top: calc(100% + 5px);
+    top: calc(100% + 4px);
     width: 250px;
-    padding: 10px 16px 0;
+    padding: 10px 20px 0;
     background-color: var(--background-color);
     white-space: initial;
     z-index: 10;
