@@ -83,6 +83,7 @@ header nav .nav-hamburger button {
   text-overflow: initial;
   white-space: initial;
   min-width: unset;
+  cursor: pointer;
 }
 
 header nav .nav-hamburger-icon,
@@ -119,6 +120,7 @@ header nav[aria-expanded='false'] .nav-hamburger-icon::after {
 
 header nav[aria-expanded='true'] .nav-hamburger-icon {
   height: 22px;
+  background: transparent;
 }
 
 header nav[aria-expanded='true'] .nav-hamburger-icon::before,
@@ -186,7 +188,6 @@ header nav .nav-search svg {
 /* sections */
 header nav .nav-sections {
   grid-area: sections;
-  flex: 1 1 auto;
   display: none;
   visibility: hidden;
 }
@@ -195,41 +196,99 @@ header nav[aria-expanded='true'] .nav-sections {
   display: block;
   visibility: visible;
   align-self: start;
-  padding: 16px 0;
+  padding: 0;
+  background-color: var(--background-color);
 }
 
 header nav .nav-sections ul {
   list-style: none;
-  padding: 0 16px;
+  padding: 0;
   margin: 0;
-  font-size: var(--body-font-size-s);
 }
 
-header nav .nav-sections ul > li {
-  font-weight: 500;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--color-light-gray);
+/* Top-level nav items */
+header nav .nav-sections .default-content-wrapper > ul > li {
   font-family: var(--mono-font-family);
   font-size: 11px;
+  font-weight: 500;
   letter-spacing: 1px;
   text-transform: uppercase;
   color: var(--color-navy);
+  border-bottom: 1px solid var(--color-mid-gray);
+  padding: 0;
+  position: relative;
 }
 
-header nav .nav-sections ul > li > ul {
-  margin-top: 8px;
-  padding-left: 12px;
+header nav .nav-sections .default-content-wrapper > ul > li > a,
+header nav .nav-sections .default-content-wrapper > ul > li > p {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  width: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+/*ACCORDION*/
+header nav .nav-sections .nav-drop > a::after,
+header nav .nav-sections .nav-drop > p::after {
+  content: '';
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid var(--color-navy);
+  border-bottom: 1.5px solid var(--color-navy);
+  transform: rotate(45deg);
+  transition: transform 0.25s ease;
+  flex-shrink: 0;
+  margin-left: 8px;
 }
 
-header nav .nav-sections ul > li > ul > li {
+/* Chevron rotates up when expanded */
+header nav .nav-sections .nav-drop[aria-expanded='true'] > a::after,
+header nav .nav-sections .nav-drop[aria-expanded='true'] > p::after {
+  transform: rotate(-135deg);
+}
+
+/* SUBMENU */
+header nav .nav-sections .default-content-wrapper > ul > li > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  background-color: var(--color-light-gray, #f5f5f5);
+}
+
+header nav .nav-sections .default-content-wrapper > ul > li[aria-expanded='true'] > ul {
+  max-height: 400px; 
+}
+
+/* Submenu items */
+header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
+  font-family: var(--mono-font-family);
+  font-size: 11px;
   font-weight: 400;
-  padding: 8px 0;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--color-navy);
+  border-bottom: 1px solid var(--color-mid-gray);
+  padding: 0;
+}
+
+header nav .nav-sections .default-content-wrapper > ul > li > ul > li:last-child {
   border-bottom: none;
+}
+
+header nav .nav-sections .default-content-wrapper > ul > li > ul > li > a {
+  display: block;
+  padding: 14px 20px 14px 32px; /* indented */
+  box-sizing: border-box;
 }
 
 /* tools - stock ticker (hidden on mobile) */
 header nav .nav-tools {
-  grid-area: tools;
   display: none;
 }
 
@@ -304,7 +363,7 @@ header nav .nav-tools {
     padding: 0;
   }
 
-  header nav .nav-sections ul > li {
+  header nav .nav-sections .default-content-wrapper > ul > li {
     font-family: var(--mono-font-family);
     font-size: 11px;
     font-weight: 400;
@@ -313,6 +372,18 @@ header nav .nav-tools {
     color: var(--color-navy);
     padding: 0;
     border-bottom: none;
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li > a,
+  header nav .nav-sections .default-content-wrapper > ul > li > p {
+    padding: 0;
+    justify-content: flex-start;
+  }
+
+  /* hide chevron on desktop */
+  header nav .nav-sections .nav-drop > a::after,
+  header nav .nav-sections .nav-drop > p::after {
+    display: none;
   }
 
   header nav .nav-sections ul > li:hover {
@@ -324,11 +395,6 @@ header nav .nav-tools {
     cursor: pointer;
   }
 
-  /* no arrow on desktop */
-  header nav .nav-sections .nav-drop::after {
-    display: none;
-  }
-
   header nav .nav-sections .default-content-wrapper > ul > li {
     flex: 0 1 auto;
     position: static;
@@ -336,13 +402,15 @@ header nav .nav-tools {
     margin-bottom: -14px;
   }
 
-  /* active underline at bottom of nav bar */
   header nav .nav-sections .default-content-wrapper > ul > li.nav-drop:hover {
     border-bottom: 3px solid var(--color-navy);
   }
 
+  /* desktop submenu — dropdown on hover */
   header nav .nav-sections .default-content-wrapper > ul > li > ul {
     display: none;
+    max-height: unset;
+    overflow: visible;
     position: absolute;
     left: 0;
     top: calc(100% + 1px);
@@ -356,6 +424,7 @@ header nav .nav-tools {
     flex-direction: column;
     align-items: flex-start;
     gap: 0;
+    transition: none;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
@@ -363,17 +432,20 @@ header nav .nav-tools {
     border-bottom: 1px solid var(--color-light-gray);
     width: 100%;
     font-weight: 400;
+    background-color: transparent;
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li > ul > li > a {
+    padding: 0;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li:last-child {
     border-bottom: none;
   }
 
-  /* show on hover */
   header nav .nav-sections .default-content-wrapper > ul > li:hover > ul {
     display: flex;
   }
-
 
   header nav .nav-tools {
     display: block;
@@ -391,7 +463,6 @@ header nav .nav-tools {
     color: var(--color-navy);
   }
 
-/* search icon */
   header nav .nav-search {
     position: absolute;
     top: 24px;
