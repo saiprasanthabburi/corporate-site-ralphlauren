@@ -62,9 +62,7 @@ header nav a:hover {
   opacity: 0.8;
 }
 
-/* ============================================================
-   HAMBURGER
-   ============================================================ */
+/* hamburger */
 header nav .nav-hamburger {
   grid-area: hamburger;
   height: 22px;
@@ -85,7 +83,6 @@ header nav .nav-hamburger button {
   text-overflow: initial;
   white-space: initial;
   min-width: unset;
-  cursor: pointer;
 }
 
 header nav .nav-hamburger-icon,
@@ -104,7 +101,6 @@ header nav .nav-hamburger-icon::after {
   background: currentcolor;
 }
 
-/* Closed — three lines */
 header nav[aria-expanded='false'] .nav-hamburger-icon,
 header nav[aria-expanded='false'] .nav-hamburger-icon::before,
 header nav[aria-expanded='false'] .nav-hamburger-icon::after {
@@ -121,10 +117,8 @@ header nav[aria-expanded='false'] .nav-hamburger-icon::after {
   top: 6px;
 }
 
-/* Open — X icon */
 header nav[aria-expanded='true'] .nav-hamburger-icon {
   height: 22px;
-  background: transparent;
 }
 
 header nav[aria-expanded='true'] .nav-hamburger-icon::before,
@@ -144,9 +138,7 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
   transform: rotate(-45deg);
 }
 
-/* ============================================================
-   BRAND
-   ============================================================ */
+/* brand */
 header .nav-brand {
   grid-area: brand;
   display: flex;
@@ -171,9 +163,7 @@ header nav .nav-brand a.nav-brand-text {
   white-space: nowrap;
 }
 
-/* ============================================================
-   SEARCH
-   ============================================================ */
+/* search icon */
 header nav .nav-search {
   grid-area: search;
   display: flex;
@@ -193,11 +183,10 @@ header nav .nav-search svg {
   height: 16px;
 }
 
-/* ============================================================
-   MOBILE NAV SECTIONS
-   ============================================================ */
+/* sections */
 header nav .nav-sections {
   grid-area: sections;
+  flex: 1 1 auto;
   display: none;
   visibility: hidden;
 }
@@ -206,159 +195,45 @@ header nav[aria-expanded='true'] .nav-sections {
   display: block;
   visibility: visible;
   align-self: start;
-  background-color: var(--background-color);
-  width: 100%;
-  padding: 0;
+  padding: 16px 0;
 }
 
-/* reset all lists */
 header nav .nav-sections ul {
   list-style: none;
-  padding: 0;
+  padding: 0 16px;
   margin: 0;
+  font-size: var(--body-font-size-s);
 }
 
-/* ── Top-level items ── */
-header nav .nav-sections .default-content-wrapper > ul > li {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-family: var(--heading-font-family);
-  font-size: 15px;
+header nav .nav-sections ul > li {
+  font-weight: 500;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--color-light-gray);
+  font-family: var(--mono-font-family);
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--color-navy);
+}
+
+header nav .nav-sections ul > li > ul {
+  margin-top: 8px;
+  padding-left: 12px;
+}
+
+header nav .nav-sections ul > li > ul > li {
   font-weight: 400;
-  letter-spacing: 0.2px;
-  text-transform: none;
-  color: var(--color-navy);
-  border-bottom: 1px solid var(--color-light-gray, #e8e8e8);
-  padding: 0;
-  cursor: pointer;
-  position: relative;
-  min-height: 60px;
-  box-sizing: border-box;
-}
-
-/* anchor fills the full row */
-header nav .nav-sections .default-content-wrapper > ul > li > a {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  padding: 18px 20px;
-  box-sizing: border-box;
-  color: var(--color-navy);
-  font-size: 15px;
-  font-family: var(--heading-font-family);
-  font-weight: 400;
-  text-transform: none;
-  letter-spacing: 0.2px;
-}
-
-/* li with no child anchor */
-header nav .nav-sections .default-content-wrapper > ul > li:not(:has(> a)) {
-  padding: 18px 20px;
-}
-
-/* ── Right chevron on items with submenus ── */
-header nav .nav-sections .default-content-wrapper > ul > li.nav-drop > a::after {
-  content: '›';
-  font-size: 26px;
-  font-weight: 300;
-  line-height: 1;
-  color: var(--color-navy);
-  flex-shrink: 0;
-  margin-left: 8px;
-  display: inline-block;
-  transition: transform 0.2s ease;
-}
-
-/* rotate chevron when open */
-header nav .nav-sections .default-content-wrapper > ul > li.nav-drop[aria-expanded='true'] > a::after {
-  transform: rotate(90deg);
-}
-
-/* ── Submenu ── */
-header nav .nav-sections .default-content-wrapper > ul > li > ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease;
-  background-color: var(--background-color);
-  width: 100%;
-}
-
-header nav .nav-sections .default-content-wrapper > ul > li[aria-expanded='true'] > ul {
-  max-height: 600px;
-}
-
-/* submenu items */
-header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
-  font-family: var(--heading-font-family);
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: 0.2px;
-  text-transform: none;
-  color: var(--color-navy);
-  border-bottom: 1px solid var(--color-light-gray, #e8e8e8);
-  min-height: unset;
-}
-
-header nav .nav-sections .default-content-wrapper > ul > li > ul > li:last-child {
+  padding: 8px 0;
   border-bottom: none;
 }
 
-header nav .nav-sections .default-content-wrapper > ul > li > ul > li > a {
-  display: block;
-  padding: 16px 20px 16px 36px;
-  box-sizing: border-box;
-  width: 100%;
-  color: var(--color-navy);
-  font-size: 14px;
-  font-family: var(--heading-font-family);
-  text-transform: none;
-}
-
-/* ============================================================
-   MOBILE TICKER BAR — dark navy strip at bottom
-   ============================================================ */
-header nav .nav-mobile-ticker {
-  display: none;
-  background-color: var(--color-navy, #1a2340);
-  padding: 20px;
-}
-
-header nav[aria-expanded='true'] .nav-mobile-ticker {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-header nav .nav-mobile-ticker-text {
-  font-family: var(--mono-font-family);
-  font-size: 11px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: #fff;
-  margin: 0;
-}
-
-header nav .nav-mobile-ticker-text strong {
-  font-weight: 700;
-  margin-right: 4px;
-}
-
-/* ============================================================
-   TOOLS — hidden on mobile
-   ============================================================ */
+/* tools - stock ticker (hidden on mobile) */
 header nav .nav-tools {
+  grid-area: tools;
   display: none;
 }
 
-/* ============================================================
-   DESKTOP
-   ============================================================ */
+
 @media (width >= 900px) {
   header .nav-wrapper {
     position: relative;
@@ -380,6 +255,7 @@ header nav .nav-tools {
     overflow: visible;
   }
 
+  /* hamburger hidden on desktop */
   header nav .nav-hamburger {
     display: none;
     visibility: hidden;
@@ -413,7 +289,6 @@ header nav .nav-tools {
     padding: 14px 0;
     border-bottom: 1px solid var(--color-mid-gray);
     position: relative;
-    background-color: transparent;
   }
 
   header nav[aria-expanded='true'] .nav-sections {
@@ -429,9 +304,7 @@ header nav .nav-tools {
     padding: 0;
   }
 
-  /* reset mobile styles for desktop */
-  header nav .nav-sections .default-content-wrapper > ul > li {
-    display: block;
+  header nav .nav-sections ul > li {
     font-family: var(--mono-font-family);
     font-size: 11px;
     font-weight: 400;
@@ -440,36 +313,10 @@ header nav .nav-tools {
     color: var(--color-navy);
     padding: 0;
     border-bottom: none;
-    min-height: unset;
-    flex: 0 1 auto;
-    position: static;
-    padding-bottom: 14px;
-    margin-bottom: -14px;
-    cursor: pointer;
   }
 
-  header nav .nav-sections .default-content-wrapper > ul > li:hover {
+  header nav .nav-sections ul > li:hover {
     font-weight: bold;
-  }
-
-  header nav .nav-sections .default-content-wrapper > ul > li.nav-drop:hover {
-    border-bottom: 3px solid var(--color-navy);
-  }
-
-  /* reset mobile anchor */
-  header nav .nav-sections .default-content-wrapper > ul > li > a {
-    display: inline;
-    padding: 0;
-    width: auto;
-    font-size: 11px;
-    font-family: var(--mono-font-family);
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
-  }
-
-  /* hide chevron on desktop */
-  header nav .nav-sections .default-content-wrapper > ul > li.nav-drop > a::after {
-    display: none;
   }
 
   header nav .nav-sections .nav-drop {
@@ -477,12 +324,25 @@ header nav .nav-tools {
     cursor: pointer;
   }
 
-  /* desktop submenu dropdown on hover */
+  /* no arrow on desktop */
+  header nav .nav-sections .nav-drop::after {
+    display: none;
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li {
+    flex: 0 1 auto;
+    position: static;
+    padding-bottom: 14px;
+    margin-bottom: -14px;
+  }
+
+  /* active underline at bottom of nav bar */
+  header nav .nav-sections .default-content-wrapper > ul > li.nav-drop:hover {
+    border-bottom: 3px solid var(--color-navy);
+  }
+
   header nav .nav-sections .default-content-wrapper > ul > li > ul {
     display: none;
-    max-height: unset;
-    overflow: visible;
-    transition: none;
     position: absolute;
     left: 0;
     top: calc(100% + 1px);
@@ -503,34 +363,17 @@ header nav .nav-tools {
     border-bottom: 1px solid var(--color-light-gray);
     width: 100%;
     font-weight: 400;
-    font-size: 11px;
-    font-family: var(--mono-font-family);
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
-    background-color: transparent;
-    min-height: unset;
-  }
-
-  header nav .nav-sections .default-content-wrapper > ul > li > ul > li > a {
-    display: inline;
-    padding: 0;
-    font-size: 11px;
-    font-family: var(--mono-font-family);
-    text-transform: uppercase;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li:last-child {
     border-bottom: none;
   }
 
+  /* show on hover */
   header nav .nav-sections .default-content-wrapper > ul > li:hover > ul {
     display: flex;
   }
 
-  /* hide mobile ticker on desktop */
-  header nav .nav-mobile-ticker {
-    display: none !important;
-  }
 
   header nav .nav-tools {
     display: block;
@@ -548,6 +391,7 @@ header nav .nav-tools {
     color: var(--color-navy);
   }
 
+/* search icon */
   header nav .nav-search {
     position: absolute;
     top: 24px;
