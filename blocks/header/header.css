@@ -206,39 +206,50 @@ header nav .nav-sections ul {
   font-size: var(--body-font-size-s);
 }
 
-/* mobile: top-level nav items */
+/* ── MOBILE: every top-level li ── */
 header nav .nav-sections ul > li {
-  font-weight: 500;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: stretch;
   border-bottom: 1px solid var(--color-light-gray);
   font-family: var(--mono-font-family);
   font-size: 11px;
   letter-spacing: 1px;
   text-transform: uppercase;
   color: var(--color-navy);
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
+  font-weight: 500;
   padding: 0;
   position: relative;
+  min-height: 46px;
 }
 
-/* label wrapper — takes all space except chevron */
-header nav .nav-sections ul > li .nav-drop-label {
+/* label for items WITHOUT submenu */
+header nav .nav-sections ul > li .nav-item-label {
   flex: 1 1 auto;
+  display: flex;
+  align-items: center;
   padding: 14px 16px;
-  display: block;
   cursor: pointer;
 }
 
-/* chevron toggle button — pinned to the right */
+/* label for items WITH submenu */
+header nav .nav-sections ul > li .nav-drop-label {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+  cursor: pointer;
+}
+
+/* chevron toggle button — right side, separated by a line */
 header nav .nav-sections ul > li .nav-drop-toggle {
-  flex: 0 0 44px;
+  flex: 0 0 46px;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 46px;
-  width: 44px;
+  width: 46px;
+  min-height: 46px;
   font-size: 22px;
   font-weight: 300;
   line-height: 1;
@@ -254,11 +265,12 @@ header nav .nav-sections ul > li .nav-drop-toggle {
   transform-origin: center;
 }
 
+/* rotate chevron when open */
 header nav .nav-sections ul > li[aria-expanded='true'] .nav-drop-toggle {
   transform: rotate(90deg);
 }
 
-/* sub-menu: hidden by default on mobile */
+/* sub-menu hidden by default */
 header nav .nav-sections ul > li > ul {
   display: none;
   flex-basis: 100%;
@@ -268,24 +280,26 @@ header nav .nav-sections ul > li > ul {
   background-color: var(--background-color);
 }
 
-/* sub-menu: show when parent is expanded */
+/* sub-menu visible when parent expanded */
 header nav .nav-sections ul > li[aria-expanded='true'] > ul {
   display: block;
-  padding: 4px 0 10px 0;
+  padding: 4px 0 12px 0;
 }
 
 /* sub-items */
 header nav .nav-sections ul > li > ul > li {
+  display: block;
   font-weight: 300;
   font-size: 11px;
   letter-spacing: 0.5px;
+  text-transform: uppercase;
   padding: 9px 16px 9px 28px;
   border-bottom: none;
   color: var(--color-navy);
   opacity: 0.65;
-  display: block;
-  text-transform: uppercase;
   cursor: pointer;
+  min-height: unset;
+  flex-wrap: nowrap;
 }
 
 header nav .nav-sections ul > li > ul > li:hover {
@@ -320,7 +334,6 @@ header nav .nav-tools {
     overflow: visible;
   }
 
-  /* hamburger hidden on desktop */
   header nav .nav-hamburger {
     display: none;
     visibility: hidden;
@@ -369,7 +382,7 @@ header nav .nav-tools {
     padding: 0;
   }
 
-  /* reset li for desktop */
+  /* reset every li for desktop */
   header nav .nav-sections ul > li {
     font-family: var(--mono-font-family);
     font-size: 11px;
@@ -379,6 +392,7 @@ header nav .nav-tools {
     color: var(--color-navy);
     padding: 0;
     border-bottom: none;
+    min-height: unset;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -388,24 +402,26 @@ header nav .nav-tools {
     position: relative;
   }
 
-  /* reset label wrapper for desktop */
-  header nav .nav-sections ul > li .nav-drop-label {
-    padding: 0;
-    flex: unset;
-  }
-
   header nav .nav-sections ul > li:hover {
     font-weight: bold;
   }
 
-  header nav .nav-sections .nav-drop {
-    position: relative;
-    cursor: pointer;
+  /* reset label wrappers for desktop */
+  header nav .nav-sections ul > li .nav-item-label,
+  header nav .nav-sections ul > li .nav-drop-label {
+    padding: 0;
+    flex: unset;
+    display: inline;
   }
 
   /* hide chevron on desktop */
   header nav .nav-sections ul > li .nav-drop-toggle {
     display: none;
+  }
+
+  header nav .nav-sections .nav-drop {
+    position: relative;
+    cursor: pointer;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li {
@@ -422,7 +438,7 @@ header nav .nav-tools {
     border-bottom: none;
   }
 
-  /* desktop sub-menu */
+  /* desktop dropdown */
   header nav .nav-sections .default-content-wrapper > ul > li > ul {
     display: none;
     position: absolute;
@@ -443,18 +459,18 @@ header nav .nav-tools {
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
     padding: 24px 0;
+    padding-left: 0;
     width: 100%;
     font-weight: 400;
     opacity: 1;
     display: block;
-    padding-left: 0;
+    min-height: unset;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li:last-child {
     border-bottom: none;
   }
 
-  /* show sub-menu on hover desktop only */
   header nav .nav-sections .default-content-wrapper > ul > li:hover > ul {
     display: flex;
   }

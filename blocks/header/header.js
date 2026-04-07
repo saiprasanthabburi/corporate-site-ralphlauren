@@ -116,15 +116,15 @@ export default async function decorate(block) {
   if (navSections) {
     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
       const subMenu = navSection.querySelector('ul');
+
       if (subMenu) {
+        // this item HAS a submenu — add chevron toggle
         navSection.classList.add('nav-drop');
         navSection.setAttribute('aria-expanded', 'false');
 
-        // build the top row: label wrapper + chevron button
-        // wrap the existing text/anchor content in a label span
+        // wrap existing non-ul children in a label span
         const labelWrapper = document.createElement('span');
         labelWrapper.className = 'nav-drop-label';
-        // move all existing child nodes except the ul into labelWrapper
         [...navSection.childNodes].forEach((child) => {
           if (child !== subMenu) labelWrapper.append(child);
         });
@@ -135,30 +135,39 @@ export default async function decorate(block) {
         toggleBtn.setAttribute('aria-hidden', 'true');
         toggleBtn.setAttribute('tabindex', '-1');
         toggleBtn.type = 'button';
-        toggleBtn.innerHTML = '&#8250;'; // › character
+        toggleBtn.innerHTML = '&#8250;'; // ›
 
-        // put label + chevron back into the li, then the submenu last
+        // re-append in order: label | chevron | submenu
         navSection.append(labelWrapper);
         navSection.append(toggleBtn);
         navSection.append(subMenu);
 
-        // ONLY the chevron button toggles the submenu
+        // chevron click: toggle only this submenu, never close the whole nav
         toggleBtn.addEventListener('click', (e) => {
           e.preventDefault();
-          e.stopPropagation(); // stop bubbling to nav/hamburger
+          e.stopPropagation();
           if (!isDesktop.matches) {
             const isExpanded = navSection.getAttribute('aria-expanded') === 'true';
-            // collapse all others
             toggleAllNavSections(navSections);
-            // toggle this one
             navSection.setAttribute('aria-expanded', isExpanded ? 'false' : 'true');
           }
         });
 
-        // clicking the label navigates — do NOT toggle submenu
+        // label click: navigate, don't close nav
         labelWrapper.addEventListener('click', (e) => {
-          e.stopPropagation(); // don't let it reach the hamburger listener
-          // default link behaviour continues (no preventDefault)
+          e.stopPropagation();
+        });
+
+      } else {
+        // this item has NO submenu — wrap its content so styling stays consistent
+        const labelWrapper = document.createElement('span');
+        labelWrapper.className = 'nav-item-label';
+        [...navSection.childNodes].forEach((child) => labelWrapper.append(child));
+        navSection.append(labelWrapper);
+
+        // stop clicks bubbling to hamburger
+        navSection.addEventListener('click', (e) => {
+          e.stopPropagation();
         });
       }
     });
