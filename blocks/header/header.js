@@ -120,32 +120,45 @@ export default async function decorate(block) {
         navSection.classList.add('nav-drop');
         navSection.setAttribute('aria-expanded', 'false');
 
-        // add real chevron toggle button (pseudo-elements can't be reliably clicked)
-        const toggleBtn = document.createElement('span');
+        // build the top row: label wrapper + chevron button
+        // wrap the existing text/anchor content in a label span
+        const labelWrapper = document.createElement('span');
+        labelWrapper.className = 'nav-drop-label';
+        // move all existing child nodes except the ul into labelWrapper
+        [...navSection.childNodes].forEach((child) => {
+          if (child !== subMenu) labelWrapper.append(child);
+        });
+
+        // chevron button
+        const toggleBtn = document.createElement('button');
         toggleBtn.className = 'nav-drop-toggle';
         toggleBtn.setAttribute('aria-hidden', 'true');
-        navSection.append(toggleBtn);
+        toggleBtn.setAttribute('tabindex', '-1');
+        toggleBtn.type = 'button';
+        toggleBtn.innerHTML = '&#8250;'; // › character
 
-        // chevron click: only toggle the sub-menu, don't bubble to hamburger
+        // put label + chevron back into the li, then the submenu last
+        navSection.append(labelWrapper);
+        navSection.append(toggleBtn);
+        navSection.append(subMenu);
+
+        // ONLY the chevron button toggles the submenu
         toggleBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation(); // stop bubbling to nav/hamburger
           if (!isDesktop.matches) {
-            e.preventDefault();
-            e.stopPropagation();
-            const expanded = navSection.getAttribute('aria-expanded') === 'true';
+            const isExpanded = navSection.getAttribute('aria-expanded') === 'true';
+            // collapse all others
             toggleAllNavSections(navSections);
-            navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+            // toggle this one
+            navSection.setAttribute('aria-expanded', isExpanded ? 'false' : 'true');
           }
         });
 
-        // label / link click: navigate normally on mobile, do nothing special
-        navSection.addEventListener('click', (e) => {
-          if (!isDesktop.matches) {
-            // clicks inside the sub-menu items should navigate freely
-            if (subMenu.contains(e.target)) return;
-            // chevron is handled by its own listener above
-            if (e.target.classList.contains('nav-drop-toggle')) return;
-            // anything else (the label / anchor): let it navigate, don't toggle
-          }
+        // clicking the label navigates — do NOT toggle submenu
+        labelWrapper.addEventListener('click', (e) => {
+          e.stopPropagation(); // don't let it reach the hamburger listener
+          // default link behaviour continues (no preventDefault)
         });
       }
     });
