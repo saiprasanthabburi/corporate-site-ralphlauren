@@ -37,12 +37,12 @@ header nav p {
 
 header nav a:any-link,
 header nav a.button:any-link {
-  display: inline;
+  /* display: inline; */
   color: currentcolor;
   text-decoration: none;
   border: none;
   background: none;
-  padding: 1.25rem 0;
+  padding: 0.5rem 0;
   margin: 0;
   min-width: unset;
   height: auto;
@@ -370,8 +370,8 @@ header nav .nav-tools {
   header nav .nav-tools {
     display: block;
     position: absolute;
-    top: 37%;
-    left: 20px;
+    top: 34%;
+    left: 38px;
     transform: translateY(-50%);
   }
 
@@ -387,8 +387,8 @@ header nav .nav-tools {
   /* ── SEARCH: sits inside .nav-brand, absolute right ── */
   header nav .nav-search {
     position: absolute;
-    top: 37%;
-    right: 25px;
+    top: 33%;
+    right: 35px;
     transform: translateY(-50%);
     padding-right: 0;
     grid-area: unset;
@@ -421,7 +421,7 @@ header nav .nav-tools {
     align-items: stretch;
     gap: 0;
     margin: 0;
-    padding: 0 20px;
+    /* padding: 0 20px; */
   }
 
   /* ── DESKTOP: every top-level li ── */
@@ -473,7 +473,7 @@ header nav .nav-tools {
   header nav .nav-sections ul > li > ul {
     display: none;
     position: absolute;
-    left: -56px;
+    left: -40px;
     top: 100%;
     width: 220px;
     padding: 0;
@@ -496,7 +496,7 @@ header nav .nav-tools {
   header nav .nav-sections ul > li > ul > li {
     display: block;
     width: 100%;
-    padding: 20px 0px 20px 56px;
+    padding: 20px 0px 20px 40px;
     font-weight: 400;
     font-size: 11px;
     letter-spacing: 0.5px;
