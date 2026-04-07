@@ -370,7 +370,7 @@ header nav .nav-tools {
   header nav .nav-tools {
     display: block;
     position: absolute;
-    top: 50%;
+    top: 37%;
     left: 20px;
     transform: translateY(-50%);
   }
@@ -387,16 +387,16 @@ header nav .nav-tools {
   /* ── SEARCH: sits inside .nav-brand, absolute right ── */
   header nav .nav-search {
     position: absolute;
-    top: 50%;
-    right: 20px;
+    top: 37%;
+    right: 25px;
     transform: translateY(-50%);
     padding-right: 0;
     grid-area: unset;
   }
 
   header nav .nav-search svg {
-    width: 20px;
-    height: 20px;
+    width: 35px;
+    height: 30px;
   }
 
   /* ── ROW 2: nav sections bar ── */
@@ -441,7 +441,7 @@ header nav .nav-tools {
     cursor: pointer;
     opacity: 1;
     position: relative;
-    padding: 0 16px;
+    /* padding: 0 16px; */
 
     /* underline hover trick — extend below to meet the border */
     padding-bottom: 14px;
@@ -473,7 +473,7 @@ header nav .nav-tools {
   header nav .nav-sections ul > li > ul {
     display: none;
     position: absolute;
-    left: -40px;
+    left: -56px;
     top: 100%;
     width: 220px;
     padding: 0;
@@ -496,7 +496,7 @@ header nav .nav-tools {
   header nav .nav-sections ul > li > ul > li {
     display: block;
     width: 100%;
-    padding: 20px 56px;
+    padding: 20px 0px 20px 56px;
     font-weight: 400;
     font-size: 11px;
     letter-spacing: 0.5px;
