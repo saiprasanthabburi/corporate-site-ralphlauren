@@ -206,7 +206,7 @@ header nav .nav-sections ul {
   font-size: var(--body-font-size-s);
 }
 
-/* ── MOBILE: top-level nav items ── */
+/* mobile: top-level nav items */
 header nav .nav-sections ul > li {
   font-weight: 500;
   padding: 14px 16px;
@@ -223,38 +223,55 @@ header nav .nav-sections ul > li {
   cursor: pointer;
 }
 
-/* Chevron arrow on items with sub-menus */
+/* no pseudo-element chevron */
 header nav .nav-sections ul > li.nav-drop::after {
-  content: '›';
+  display: none;
+}
+
+/* real chevron toggle button */
+header nav .nav-sections ul > li.nav-drop .nav-drop-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
   font-size: 20px;
   font-weight: 300;
   line-height: 1;
+  color: var(--color-navy);
+  cursor: pointer;
   transition: transform 0.25s ease;
   transform: rotate(0deg);
-  display: inline-block;
+  flex-shrink: 0;
+  pointer-events: all;
 }
 
-/* Rotate chevron when expanded */
-header nav .nav-sections ul > li.nav-drop[aria-expanded='true']::after {
+header nav .nav-sections ul > li.nav-drop .nav-drop-toggle::before {
+  content: '›';
+  display: block;
+}
+
+header nav .nav-sections ul > li.nav-drop[aria-expanded='true'] .nav-drop-toggle {
   transform: rotate(90deg);
 }
 
-/* Sub-menu: hidden by default on mobile */
+/* sub-menu: hidden by default on mobile */
 header nav .nav-sections ul > li > ul {
   display: none;
   flex-basis: 100%;
+  width: 100%;
   padding: 0;
   margin: 0;
   background-color: var(--background-color);
 }
 
-/* Sub-menu: show when parent is expanded */
+/* sub-menu: show when parent is expanded */
 header nav .nav-sections ul > li[aria-expanded='true'] > ul {
   display: block;
   padding: 4px 0 10px 0;
 }
 
-/* Sub-items styling */
+/* sub-items */
 header nav .nav-sections ul > li > ul > li {
   font-weight: 300;
   font-size: 11px;
@@ -267,6 +284,7 @@ header nav .nav-sections ul > li > ul > li {
   text-transform: uppercase;
   cursor: pointer;
   flex-wrap: nowrap;
+  justify-content: flex-start;
 }
 
 header nav .nav-sections ul > li > ul > li:hover {
@@ -374,8 +392,8 @@ header nav .nav-tools {
     cursor: pointer;
   }
 
-  /* no arrow on desktop */
-  header nav .nav-sections .nav-drop::after {
+  /* hide chevron on desktop */
+  header nav .nav-sections ul > li.nav-drop .nav-drop-toggle {
     display: none;
   }
 
@@ -385,7 +403,6 @@ header nav .nav-tools {
     margin-bottom: -17px;
   }
 
-  /* active underline at bottom of nav bar */
   header nav .nav-sections .default-content-wrapper > ul > li.nav-drop:hover {
     text-decoration-line: underline;
     text-underline-offset: 17px;
@@ -394,7 +411,7 @@ header nav .nav-tools {
     border-bottom: none;
   }
 
-  /* desktop sub-menu: hidden by default, shown on hover */
+  /* desktop sub-menu */
   header nav .nav-sections .default-content-wrapper > ul > li > ul {
     display: none;
     position: absolute;
@@ -419,6 +436,7 @@ header nav .nav-tools {
     font-weight: 400;
     opacity: 1;
     display: block;
+    justify-content: flex-start;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li:last-child {
@@ -446,7 +464,6 @@ header nav .nav-tools {
     color: var(--color-navy);
   }
 
-  /* search icon */
   header nav .nav-search {
     position: absolute;
     top: 24px;

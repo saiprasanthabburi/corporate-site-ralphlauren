@@ -1,7 +1,6 @@
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 
-// media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');
 
 function closeOnEscape(e) {
@@ -10,11 +9,9 @@ function closeOnEscape(e) {
     const navSections = nav.querySelector('.nav-sections');
     const navSectionExpanded = navSections.querySelector('[aria-expanded="true"]');
     if (navSectionExpanded && isDesktop.matches) {
-      // eslint-disable-next-line no-use-before-define
       toggleAllNavSections(navSections);
       navSectionExpanded.focus();
     } else if (!isDesktop.matches) {
-      // eslint-disable-next-line no-use-before-define
       toggleMenu(nav, navSections);
       nav.querySelector('button').focus();
     }
@@ -27,10 +24,8 @@ function closeOnFocusLost(e) {
     const navSections = nav.querySelector('.nav-sections');
     const navSectionExpanded = navSections.querySelector('[aria-expanded="true"]');
     if (navSectionExpanded && isDesktop.matches) {
-      // eslint-disable-next-line no-use-before-define
       toggleAllNavSections(navSections, false);
     } else if (!isDesktop.matches) {
-      // eslint-disable-next-line no-use-before-define
       toggleMenu(nav, navSections, false);
     }
   }
@@ -41,7 +36,6 @@ function openOnKeydown(e) {
   const isNavDrop = focused.className === 'nav-drop';
   if (isNavDrop && (e.code === 'Enter' || e.code === 'Space')) {
     const dropExpanded = focused.getAttribute('aria-expanded') === 'true';
-    // eslint-disable-next-line no-use-before-define
     toggleAllNavSections(focused.closest('.nav-sections'));
     focused.setAttribute('aria-expanded', dropExpanded ? 'false' : 'true');
   }
@@ -51,23 +45,12 @@ function focusNavSection() {
   document.activeElement.addEventListener('keydown', openOnKeydown);
 }
 
-/**
- * Toggles all nav sections
- * @param {Element} sections The container element
- * @param {Boolean} expanded Whether the element should be expanded or collapsed
- */
 function toggleAllNavSections(sections, expanded = false) {
   sections.querySelectorAll('.nav-sections .default-content-wrapper > ul > li').forEach((section) => {
     section.setAttribute('aria-expanded', expanded);
   });
 }
 
-/**
- * Toggles the entire nav
- * @param {Element} nav The container element
- * @param {Element} navSections The nav sections within the container element
- * @param {*} forceExpanded Optional param to force nav expand behavior when not null
- */
 function toggleMenu(nav, navSections, forceExpanded = null) {
   const expanded = forceExpanded !== null ? !forceExpanded : nav.getAttribute('aria-expanded') === 'true';
   const button = nav.querySelector('.nav-hamburger button');
@@ -75,7 +58,7 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
   toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
   button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
-  // enable nav dropdown keyboard accessibility
+
   const navDrops = navSections.querySelectorAll('.nav-drop');
   if (isDesktop.matches) {
     navDrops.forEach((drop) => {
@@ -91,11 +74,8 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
     });
   }
 
-  // enable menu collapse on escape keypress
   if (!expanded || isDesktop.matches) {
-    // collapse menu on escape press
     window.addEventListener('keydown', closeOnEscape);
-    // collapse menu on focus lost
     nav.addEventListener('focusout', closeOnFocusLost);
   } else {
     window.removeEventListener('keydown', closeOnEscape);
@@ -103,17 +83,11 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   }
 }
 
-/**
- * loads and decorates the header, mainly the nav
- * @param {Element} block The header block element
- */
 export default async function decorate(block) {
-  // load nav as fragment
   const navMeta = getMetadata('nav');
   const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
   const fragment = await loadFragment(navPath);
 
-  // decorate nav DOM
   block.textContent = '';
   const nav = document.createElement('nav');
   nav.id = 'nav';
@@ -132,7 +106,6 @@ export default async function decorate(block) {
     brandLink.closest('.button-container').className = '';
   }
 
-  // fallback: add brand text when logo image is missing
   const brandAnchor = navBrand.querySelector('a');
   if (brandAnchor && !brandAnchor.querySelector('img') && !brandAnchor.textContent.trim()) {
     brandAnchor.textContent = 'Ralph Lauren Corporation';
@@ -145,29 +118,40 @@ export default async function decorate(block) {
       const subMenu = navSection.querySelector('ul');
       if (subMenu) {
         navSection.classList.add('nav-drop');
-        // initialise collapsed
         navSection.setAttribute('aria-expanded', 'false');
 
-        navSection.addEventListener('click', (e) => {
+        // add real chevron toggle button (pseudo-elements can't be reliably clicked)
+        const toggleBtn = document.createElement('span');
+        toggleBtn.className = 'nav-drop-toggle';
+        toggleBtn.setAttribute('aria-hidden', 'true');
+        navSection.append(toggleBtn);
+
+        // chevron click: only toggle the sub-menu, don't bubble to hamburger
+        toggleBtn.addEventListener('click', (e) => {
           if (!isDesktop.matches) {
-            // mobile: toggle dropdown on click
-            const parentLink = navSection.querySelector(':scope > a');
-            if (e.target === parentLink || e.target === navSection) {
-              e.preventDefault();
-            }
-            if (subMenu.contains(e.target)) return;
+            e.preventDefault();
+            e.stopPropagation();
             const expanded = navSection.getAttribute('aria-expanded') === 'true';
-            // close all others first, then open clicked one
             toggleAllNavSections(navSections);
             navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
           }
-          // desktop: hover handles dropdown via CSS, clicks navigate
+        });
+
+        // label / link click: navigate normally on mobile, do nothing special
+        navSection.addEventListener('click', (e) => {
+          if (!isDesktop.matches) {
+            // clicks inside the sub-menu items should navigate freely
+            if (subMenu.contains(e.target)) return;
+            // chevron is handled by its own listener above
+            if (e.target.classList.contains('nav-drop-toggle')) return;
+            // anything else (the label / anchor): let it navigate, don't toggle
+          }
         });
       }
     });
   }
 
-  // hamburger for mobile
+  // hamburger
   const hamburger = document.createElement('div');
   hamburger.classList.add('nav-hamburger');
   hamburger.innerHTML = `<button type="button" aria-controls="nav" aria-label="Open navigation">
@@ -176,7 +160,6 @@ export default async function decorate(block) {
   hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
   nav.prepend(hamburger);
   nav.setAttribute('aria-expanded', 'false');
-  // prevent mobile nav behavior on window resize
   toggleMenu(nav, navSections, isDesktop.matches);
   isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
 
