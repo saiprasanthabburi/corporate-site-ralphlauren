@@ -145,6 +145,9 @@ export default async function decorate(block) {
       const subMenu = navSection.querySelector('ul');
       if (subMenu) {
         navSection.classList.add('nav-drop');
+        // initialise collapsed
+        navSection.setAttribute('aria-expanded', 'false');
+
         navSection.addEventListener('click', (e) => {
           if (!isDesktop.matches) {
             // mobile: toggle dropdown on click
@@ -154,6 +157,7 @@ export default async function decorate(block) {
             }
             if (subMenu.contains(e.target)) return;
             const expanded = navSection.getAttribute('aria-expanded') === 'true';
+            // close all others first, then open clicked one
             toggleAllNavSections(navSections);
             navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
           }
