@@ -224,31 +224,33 @@ header nav .nav-sections ul > li {
   min-height: 46px;
 }
 
-/* label for items WITHOUT submenu */
+/* label for items WITHOUT submenu — full width */
 header nav .nav-sections ul > li .nav-item-label {
-  flex: 1 1 auto;
+  flex: 1 1 100%;
   display: flex;
   align-items: center;
   padding: 14px 16px;
   cursor: pointer;
 }
 
-/* label for items WITH submenu */
+/* label for items WITH submenu — 80% width */
 header nav .nav-sections ul > li .nav-drop-label {
-  flex: 1 1 auto;
+  flex: 0 0 80%;
+  width: 80%;
   display: flex;
   align-items: center;
   padding: 14px 16px;
   cursor: pointer;
+  box-sizing: border-box;
 }
 
-/* chevron toggle button — right side, separated by a line */
+/* chevron toggle — 20% width, right side */
 header nav .nav-sections ul > li .nav-drop-toggle {
-  flex: 0 0 46px;
+  flex: 0 0 20%;
+  width: 20%;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 46px;
   min-height: 46px;
   font-size: 22px;
   font-weight: 300;
@@ -263,9 +265,10 @@ header nav .nav-sections ul > li .nav-drop-toggle {
   transition: transform 0.25s ease;
   transform: rotate(0deg);
   transform-origin: center;
+  box-sizing: border-box;
 }
 
-/* rotate chevron when open */
+/* rotate chevron when expanded */
 header nav .nav-sections ul > li[aria-expanded='true'] .nav-drop-toggle {
   transform: rotate(90deg);
 }
@@ -306,7 +309,7 @@ header nav .nav-sections ul > li > ul > li:hover {
   opacity: 1;
 }
 
-/* tools - stock ticker (hidden on mobile) */
+/* tools — hidden on mobile */
 header nav .nav-tools {
   grid-area: tools;
   display: none;
@@ -409,8 +412,9 @@ header nav .nav-tools {
   /* reset label wrappers for desktop */
   header nav .nav-sections ul > li .nav-item-label,
   header nav .nav-sections ul > li .nav-drop-label {
-    padding: 0;
     flex: unset;
+    width: auto;
+    padding: 0;
     display: inline;
   }
 
@@ -471,6 +475,7 @@ header nav .nav-tools {
     border-bottom: none;
   }
 
+  /* show dropdown on hover — desktop only */
   header nav .nav-sections .default-content-wrapper > ul > li:hover > ul {
     display: flex;
   }

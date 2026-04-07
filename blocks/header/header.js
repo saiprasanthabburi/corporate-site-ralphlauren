@@ -56,7 +56,10 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   const button = nav.querySelector('.nav-hamburger button');
   document.body.style.overflowY = (expanded || isDesktop.matches) ? '' : 'hidden';
   nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-  toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
+
+  // always collapse all submenus when toggling the main nav
+  toggleAllNavSections(navSections, 'false');
+
   button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
 
   const navDrops = navSections.querySelectorAll('.nav-drop');
@@ -118,11 +121,11 @@ export default async function decorate(block) {
       const subMenu = navSection.querySelector('ul');
 
       if (subMenu) {
-        // this item HAS a submenu — add chevron toggle
         navSection.classList.add('nav-drop');
+        // always start collapsed
         navSection.setAttribute('aria-expanded', 'false');
 
-        // wrap existing non-ul children in a label span
+        // wrap existing non-ul children in label span
         const labelWrapper = document.createElement('span');
         labelWrapper.className = 'nav-drop-label';
         [...navSection.childNodes].forEach((child) => {
@@ -135,14 +138,14 @@ export default async function decorate(block) {
         toggleBtn.setAttribute('aria-hidden', 'true');
         toggleBtn.setAttribute('tabindex', '-1');
         toggleBtn.type = 'button';
-        toggleBtn.innerHTML = '&#8250;'; // ›
+        toggleBtn.innerHTML = '&#8250;';
 
-        // re-append in order: label | chevron | submenu
+        // order: label | chevron | submenu
         navSection.append(labelWrapper);
         navSection.append(toggleBtn);
         navSection.append(subMenu);
 
-        // chevron click: toggle only this submenu, never close the whole nav
+        // chevron toggles only this submenu
         toggleBtn.addEventListener('click', (e) => {
           e.preventDefault();
           e.stopPropagation();
@@ -153,19 +156,18 @@ export default async function decorate(block) {
           }
         });
 
-        // label click: navigate, don't close nav
+        // label navigates, doesn't close nav
         labelWrapper.addEventListener('click', (e) => {
           e.stopPropagation();
         });
 
       } else {
-        // this item has NO submenu — wrap its content so styling stays consistent
+        // no submenu — wrap for consistent styling
         const labelWrapper = document.createElement('span');
         labelWrapper.className = 'nav-item-label';
         [...navSection.childNodes].forEach((child) => labelWrapper.append(child));
         navSection.append(labelWrapper);
 
-        // stop clicks bubbling to hamburger
         navSection.addEventListener('click', (e) => {
           e.stopPropagation();
         });
