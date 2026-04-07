@@ -42,7 +42,7 @@ header nav a.button:any-link {
   text-decoration: none;
   border: none;
   background: none;
-  padding: 0;
+  padding: 1.25rem 0;
   margin: 0;
   min-width: unset;
   height: auto;
@@ -417,7 +417,7 @@ header nav .nav-tools {
   /* horizontal flex list */
   header nav .nav-sections ul {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: stretch;
     gap: 0;
     margin: 0;
@@ -472,11 +472,11 @@ header nav .nav-tools {
   header nav .nav-sections ul > li > ul {
     display: none;
     position: absolute;
-    left: 0;
+    left: -40px;
     top: 100%;
     width: 220px;
     padding: 0;
-    margin: 0;
+    margin-top: 2px;
     background-color: var(--background-color);
     white-space: normal;
     z-index: 100;
@@ -502,7 +502,7 @@ header nav .nav-tools {
     text-transform: uppercase;
     color: var(--color-navy);
     opacity: 1;
-    border-bottom: 1px solid var(--color-light-gray);
+    border: none !important;
     cursor: pointer;
     min-height: unset;
     box-sizing: border-box;
